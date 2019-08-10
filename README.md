@@ -36,9 +36,9 @@ GDOP/PDOP
 
 You can animate a bit
 <br>
-Zoom in&out with mouse roller (bit tricky but it works...)
+Zoom in&out with mouse roller (a bit tricky but it works...)
 <br>
-Choose location on Earth (avoid latitues greater than +/- 85° (extremely laaaaaaarge verticals !)
+Choose location on Earth (avoid latitudes greater than +/- 85° (extremely laaaaaaarge verticals !)
 <br>
 
 You can use it at : https://shamans.be/astrolabe.jnlp
