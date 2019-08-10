@@ -2,6 +2,7 @@
 <br>
 
 Basic astrolabe written in Java (v1.8)
+UI in French...
 <br>
 Calcul : "Astronomical Algorithms 2nd Edition, Jean Meeus"
 
