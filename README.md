@@ -36,7 +36,7 @@ GDOP/PDOP
 
 You can animate a bit
 <br>
-Zoom in&out
+Zoom in&out (bit tricky but it works...)
 <br>
 Choose location on Earth (avoid latitues greater than +/- 85° (extremely laaaaaaarge verticals !)
 <br>
