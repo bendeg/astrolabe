@@ -3,6 +3,7 @@
 
 Basic astrolabe written in Java (v1.8)
 <br>
+Calcul : "Astronomical Algorithms 2nd Edition, Jean Meeus"
 
 ~ 2000 stars (magnitute up to 6)
 <br>
