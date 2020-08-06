@@ -42,13 +42,13 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
             0.0f);                     // Dash phase
 
 	double[] stars={((6*15)+(15*45/60)+(15*8.9173/3600)), -((16)+(42/60)+(58.017/3600)),//Sirius
-					((5*15)+(15*55/60)+(15*10.29/3600)), ((7)+(24/60)+(25.3/3600)),//Bételgeuse
-					((18*15)+(15*36/60)+(15*56.3364/3600)), ((38)+(47/60)+(1.291/3600)),//Véga
+					((5*15)+(15*55/60)+(15*10.29/3600)), ((7)+(24/60)+(25.3/3600)),//Bï¿½telgeuse
+					((18*15)+(15*36/60)+(15*56.3364/3600)), ((38)+(47/60)+(1.291/3600)),//Vï¿½ga
 					((20*15)+(15*41/60)+(15*25.915/3600)), ((45)+(16/60)+(49.22/3600)),//Deneb J2000
-					((19*15)+(15*50/60)+(15*46.9/3600)), ((8)+(52/60)+(6/3600)),//Altaïr J2000
+					((19*15)+(15*50/60)+(15*46.9/3600)), ((8)+(52/60)+(6/3600)),//Altaï¿½r J2000
 					
-					((4*15)+(15*35/60)+(15*55.239/3600)), ((16)+(30/60)+(33.49/3600)),//Aldébaran (alpha Taureau)
-					((2*15)+(15*7/60)+(15*10.4057/3600)), ((23)+(27/60)+(44.7032/3600)),//Hamal (alpha Bélier) J2000
+					((4*15)+(15*35/60)+(15*55.239/3600)), ((16)+(30/60)+(33.49/3600)),//Aldï¿½baran (alpha Taureau)
+					((2*15)+(15*7/60)+(15*10.4057/3600)), ((23)+(27/60)+(44.7032/3600)),//Hamal (alpha Bï¿½lier) J2000
 					
 					};
 	
@@ -2040,7 +2040,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		g2d.clip(masque);
 		
 		//dessin du tympan
-		this.dessinerTympan();
+		if(astro.affichage.tympan.isSelected())
+		  this.dessinerTympan();
 		
 		//enlever le masque du tympan
 		g2d.setClip(null);
@@ -2048,8 +2049,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		//Ne dessiner que dans la partie droite du JSplitpane
 		g2d.setClip(this.astro.sp2.getHorizontalScrollBar().getValue(), this.astro.sp2.getVerticalScrollBar().getValue(), this.getParent().getWidth(), this.getParent().getHeight());
 				
-		//dessin de l'araignée
-		//traçage des lignes cardinales
+		//dessin de l'araignï¿½e
+		//traï¿½age des lignes cardinales
 		g2d.setStroke(normal);
 		g2d.draw(new Line2D.Double(0,this.centreY, this.getWidth(), this.centreY));
 		g2d.draw(new Line2D.Double(this.centreX, 0, this.centreX, this.getHeight()));
@@ -2060,7 +2061,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		g2d.draw(new Ellipse2D.Double(this.centreX-(int)astro.cancer, this.centreY-(int)astro.cancer, (int)astro.cancer*2, (int)astro.cancer*2));
 		//System.out.println(astro.capricorne);
 
-		//coefficients selon hémisphère
+		//coefficients selon hï¿½misphï¿½re
 		if(this.astro.home.latitude>=0) {
 			this.astro.face.hemiCoefDec=1.0;
 			this.astro.face.hemiCoefRA=0.0;
@@ -2075,12 +2076,12 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		affine=g2d.getTransform();
 		//if(this.astro.coordGeo.latitude>0)
 			affine.rotate(this.hemiCoefDec*Math.toRadians(90.0+this.astro.calc.localSiderealTime), (double)this.centreX, (double) this.centreY);
-		//else//hémisphère SUD...foireux...
+		//else//hï¿½misphï¿½re SUD...foireux...
 			//affine.rotate(-Math.toRadians(90.0+this.astro.calc.localSiderealTime), (double)this.centreX, (double) this.centreY);
 			
 		g2d.setTransform(affine);
 		
-		//dessin des étoiles
+		//dessin des ï¿½toiles
 		//System.out.println("taille stars2 = "+this.stars2.length%3);
 		int i=0;
 		while(i<this.astro.calc.stars.length/3) {			
@@ -2146,7 +2147,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		g2d.fill(ell);
 		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
 
-		//dessin de Vénus
+		//dessin de Vï¿½nus
 		//temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.astro.venusDeclination/2))*Math.cos(Math.toRadians(astro.venusRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-astro.venusDeclination/2))*Math.sin(Math.toRadians(astro.venusRA)));
 		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[1].declination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.planetes[1].ra+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[1].declination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.planetes[1].ra+this.hemiCoefRA)));
 		g2d.setColor(Color.WHITE);
@@ -2165,7 +2166,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		g2d.fill(ell);
 		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
 
-		//dessin de l'écliptique à midi heure solaire locale au moment du solstice d'hiver
+		//dessin de l'ï¿½cliptique ï¿½ midi heure solaire locale au moment du solstice d'hiver
 		g2d.setColor(Color.YELLOW);
 		g2d.setStroke(normal);
 		ell=new Ellipse2D.Double(this.centreX-(int)astro.ecliptique, this.centreY-(int)astro.ecliptique-this.hemiCoefDec*((int)astro.capricorne-(int)astro.cancer)/2.0, (int)astro.ecliptique*2.0, (int)astro.ecliptique*2.0);
@@ -2176,7 +2177,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		//dessin du soleil
 		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.calc.sunDeclination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.calc.sunDeclination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+this.hemiCoefRA)));
 		g2d.setColor(Color.YELLOW);
-		//essai taille du Soleil (zoom et éclipses...)
+		//essai taille du Soleil (zoom et ï¿½clipses...)
 		//double sizeX=this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-(this.astro.calc.sunDeclination+this.astro.calc.sunSize/2)/2))*Math.cos(Math.toRadians(this.astro.calc.sunRightAscension+this.astro.calc.sunSize/2));
 		//double sizeY=this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-(this.astro.calc.sunDeclination+this.astro.calc.sunSize/2)/2))*Math.sin(Math.toRadians(this.astro.calc.sunRightAscension+this.astro.calc.sunSize/2));
 		//double deltaX, deltaY;
@@ -2252,9 +2253,9 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		horizonrayon=astro.equateur/Math.sin(Math.toRadians(phi));
 		g2d.draw(new Ellipse2D.Double(this.centreX-horizonrayon, this.centreY-horizondistance-horizonrayon, horizonrayon*2.0, horizonrayon*2.0));
 		//System.out.println(distance+" -- "+rayon);
-		//masquer tout sauf la sphère locale
+		//masquer tout sauf la sphï¿½re locale
 
-		//dessin des lignes de crépuscule
+		//dessin des lignes de crï¿½puscule
 		g2d.setStroke(dashed);
 		hauteur=-6.0;
 		while(hauteur>=-18.0){
@@ -2271,7 +2272,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		g2d.clip(masque);
 		//g2d.drawOval(0, 0, 500, 500);
 
-		//simulation aube/crépuscule
+		//simulation aube/crï¿½puscule
 		if(this.astro.calc.sunHeight < 0.0){
 			if(this.astro.calc.sunHeight>=-18.0) {
 				//System.out.println("couleur b = "+(18.0+this.astro.calc.sunHeight)/18.0*255.0);
@@ -2287,7 +2288,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
 		g2d.setColor(Color.RED);
 		
-		if(astro.affichage.tympan.isSelected()) {
+		//if(astro.affichage.tympan.isSelected()) {
 			//dessin des almucantarats
 			g2d.setStroke(normal);
 			if(this.astro.affichage.almuvert5.isSelected()){
@@ -2323,14 +2324,14 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 					else
 						hauteur+=10.0;
 			}
-			}
+			//}
 		
 		hauteur=85.0;
 		distance=astro.equateur*Math.cos(Math.toRadians(phi))/(Math.sin(Math.toRadians(phi))+Math.sin(Math.toRadians(hauteur)));
 		rayon=astro.equateur*Math.cos(Math.toRadians(hauteur))/(Math.sin(Math.toRadians(phi))+Math.sin(Math.toRadians(hauteur)));
 		masqueZenith=new Ellipse2D.Double(this.centreX-rayon, this.centreY-distance-rayon, rayon*2.0, rayon*2.0);
 		
-		//distance centre-zénith
+		//distance centre-zï¿½nith
 		//equateur * cos latitude / ( sin latitude + 1 )
 		centrezenith=astro.equateur*Math.cos(Math.toRadians(phi))/(Math.sin(Math.toRadians(phi))+1.0);
 		//g2d.fillOval(this.centreX-5, this.centreY-(int)centrezenith-5, 10, 10);
@@ -2344,12 +2345,12 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		//g2d.drawLine(0, this.centreY+(int)droitecentres, this.getWidth(), this.centreY+(int)droitecentres);
 		g2d.draw(new Ellipse2D.Double(this.centreX-estouestrayon, this.centreY+droitecentres-estouestrayon, estouestrayon*2.0, estouestrayon*2.0));
 		
-		if(astro.affichage.tympan.isSelected()) {
+		//if(astro.affichage.tympan.isSelected()) {
 			
 			//les autres verticaux
 			//distance du foyer = rayon 1er vertical * tan de l'azimut
 			//rayon du vertical = sqrt(distance_foyer^2 + rayon 1er vertical^2)
-			//TODO dessin foireux à partir de la latitude 85°...
+			//TODO dessin foireux ï¿½ partir de la latitude 85ï¿½...
 			
 			if(this.astro.affichage.almuvert5.isSelected())
 					azimut=0.0;
@@ -2386,10 +2387,10 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 					azimut+=10.0;
 			}
 			
-			//masquage de la zone au zénith (trop de lignes passent par là...)
+			//masquage de la zone au zï¿½nith (trop de lignes passent par lï¿½...)
 			g2d.clip(masqueZenith);
 			g2d.clearRect(0, 0, this.getWidth(), this.getHeight());
-			}
+			//}
 	}
 	
 	public void mouseWheelMoved(MouseWheelEvent e) {
