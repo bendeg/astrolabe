@@ -57,9 +57,9 @@ A Double-clic on the file should work
 <br>
 If not, go to the command line :
 <br>
-1) cd directory-where-you-saved-JAR file
+1. cd directory-where-you-saved-JAR file
 <br>
-2) jar -jar astrolabe_java8_x64.jar 
+2. jar -jar astrolabe_java8_x64.jar 
 <br>
 For easier launch : make a .BAT file on the Desktop, containing those 2 commands
 <br>
