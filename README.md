@@ -33,7 +33,9 @@ OR
 <br>
 Right-clic on one to know its name, ra/dec, hour angle, position in a polar scope
 <br>
+<br>
 Executable JAR file (Java 8)
+<br>
 <br>
 Extract 4 text files from JAR file in same directory as jar file :
 <br>stars3017-alluvb-name.txt
@@ -41,3 +43,5 @@ Extract 4 text files from JAR file in same directory as jar file :
 <br>stars3017-alluvb-radecmagurvb
 <br>asterismes.txt
 <br>
+<br>
+asterismes.txt can be modified by user. A star can be linked to multiple other stars.
