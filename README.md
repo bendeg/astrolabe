@@ -43,13 +43,13 @@ You can freely (checkbox "libre") enter its RA/DEC (for negative values, only us
 <br>
 <br>
 Extract 5 files from JAR file in same directory as jar file :
-<br>stars3017-alluvb-name.txt
-<br>stars3017-alluvb-pm.txt
-<br>stars3017-alluvb-radecmagurvb
-<br>asterismes.txt
-<br>Mercator-projection.jpg
-<br>
-<br>
+<ol>
+<li>stars3017-alluvb-name.txt</li>
+<li>stars3017-alluvb-pm.txt</li>
+<li>stars3017-alluvb-radecmagurvb.txt</li>
+<li>asterismes.txt (can be modified by user. A star can be linked to multiple other stars)</li>
+<li>Mercator-projection.jpg</li>
+</ol>
 Executable JAR file (Java 8)
 <br>
 To launch : 
@@ -62,6 +62,3 @@ If not, go to the command line :
   <li>jar -jar astrolabe_java8_x64.jar</li>
 </ol>  
 For easier launch : make a .BAT file on the Desktop, containing those 2 commands
-<br>
-<br>
-asterismes.txt can be modified by user. A star can be linked to multiple other stars.
