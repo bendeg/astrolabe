@@ -55,7 +55,6 @@ double	ratio;
 		//Toolkit.;//.       .getClass().getResource("/astrolabe/Mercator-projection.jpg");
 		//this.image=new ImageIcon(getToolkit().getImage("Mercator-projection.jpg")).getImage();
 		try {
-//			URL url = new URL("https://shamans.be/Mercator-projection.jpg");
       URL url = new URL("https://github.com/bendeg/astrolabe/raw/master/src/Mercator-projection.jpg");
 			
 			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
