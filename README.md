@@ -10,7 +10,7 @@ Works offline (GPS almanach read from local folder, updated last time you ran th
 <br>
 Computations : "Astronomical Algorithms 2nd Edition, Jean Meeus"
 <br>
-3017 stars (magnitude < 6 from http://simbad.u-strasbg.fr/simbad/)
+3017 stars (magnitude < 6 from <a href="http://simbad.u-strasbg.fr/simbad/">SIMBAD Astronomical Database - CDS (Strasbourg)</a>)
 <br>  
 Precession and proper motion taken into account
 <br>
