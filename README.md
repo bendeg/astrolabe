@@ -5,6 +5,8 @@ Basic astrolabe written in Java (v1.8)
 Tested on Windows 10 and Linux Debian Buster 
 UI in French...
 <br>
+Works offline (almanach read from local folder, updated last time you ran the application with online access)
+<br>
 Computations : "Astronomical Algorithms 2nd Edition, Jean Meeus"
 <br>
 3017 stars (magnitude < 6 from http://simbad.u-strasbg.fr/simbad/)
@@ -42,6 +44,7 @@ Extract 4 text files from JAR file in same directory as jar file :
 <br>stars3017-alluvb-pm.txt
 <br>stars3017-alluvb-radecmagurvb
 <br>asterismes.txt
+<br>Mercator-projection.jpg
 <br>
 <br>
 asterismes.txt can be modified by user. A star can be linked to multiple other stars.
