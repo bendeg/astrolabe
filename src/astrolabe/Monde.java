@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -30,7 +31,8 @@ public class Monde extends JPanel implements MouseWheelListener, MouseListener, 
 	static final long serialVersionUID=1;
 	
 Astrolabe astro;
-Image image;
+//Image image;
+BufferedImage image;
 Graphics2D g2d;
 int 	centreX, centreY,
 		hauteur, largeur,
@@ -60,8 +62,13 @@ double	ratio;
 			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 		    //int responseCode = httpConn.getResponseCode();
 			InputStream in = httpConn.getInputStream();
-    		System.out.println("Chargement de la carte Mercator...");
-	        this.image=ImageIO.read(in);
+    	System.out.println("Chargement de la carte Mercator...");
+	    this.image=ImageIO.read(in);
+
+	    File mercatorProjection = new File("Mercator-projection.jpg"); 
+      //BufferedImage bf = this.image.toBufferedImage(mercatorProjection);
+	    ImageIO.write(this.image, "JPG", mercatorProjection);
+	    
 		}
 		catch (IOException x) {
 		    System.err.println(x);
