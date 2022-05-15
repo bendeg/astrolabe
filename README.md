@@ -42,7 +42,9 @@ OR
 You can freely (checkbox "libre") enter its RA/DEC (for negative values, only use "-" in RA heure or DEC degre text fields, not in "RA minute/DEC minute/RA seconde/DEC seconde) 
 <br>
 <br>
-Extract 5 files from JAR file in same directory as jar file :
+If you only want to run the application for demonstration : download the executable JAR file 
+astrolabe_java8_x64.jar (Java 8)
+and extract 5 files from JAR file in same directory as jar file :
 <ol>
 <li>stars3017-alluvb-name.txt</li>
 <li>stars3017-alluvb-pm.txt</li>
@@ -50,8 +52,6 @@ Extract 5 files from JAR file in same directory as jar file :
 <li>asterismes.txt (can be modified by user. A star can be linked to multiple other stars)</li>
 <li>Mercator-projection.jpg</li>
 </ol>
-Executable JAR file (Java 8)
-<br>
 To launch : 
 <br>
 A Double-clic on the file should work
