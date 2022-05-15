@@ -1,0 +1,11 @@
+http://simbad.u-strasbg.fr/simbad/
+
+http://simbad.u-strasbg.fr/simbad/sim-help?Page=sim-url
+
+Example URL to get JSON format :
+
+http://simbad.u-strasbg.fr/simbad/sim-tap/sync?
+	request=doQuery
+	&lang=adql
+	&format=text
+	&query=SELECT TOP 10 MAIN_ID,RA,DEC FROM BASIC WHERE rvz_redshift > 3.3
