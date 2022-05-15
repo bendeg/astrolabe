@@ -29,7 +29,8 @@ Zoom in&out with mouse roller (a bit tricky but it works...)
 <br>
 Choose location on Earth (avoid latitudes greater than +/- 85° (extremely laaaaaaarge verticals !)
 <br>
-You can locate a listed star by typing its name in the combo box (Polaris by default)
+<br>
+In tab "Affichage", you can locate a listed star by typing its name in the combo box (Polaris by default)
 <br>
 OR
 <br>
