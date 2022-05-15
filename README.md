@@ -5,7 +5,7 @@ Basic astrolabe written in Java (v1.8)
 Tested on Windows 10 and Linux Debian Buster 
 UI in French...
 <br>
-Works offline (almanach read from local folder, updated last time you ran the application with online access)
+Works offline (GPS almanach read from local folder, updated last time you ran the application with online access)
 <br>
 Computations : "Astronomical Algorithms 2nd Edition, Jean Meeus"
 <br>
