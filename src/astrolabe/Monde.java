@@ -31,7 +31,8 @@ public class Monde extends JPanel implements MouseWheelListener, MouseListener, 
 	static final long serialVersionUID=1;
 	
 Astrolabe astro;
-//Image image;
+URL url;
+HttpURLConnection httpConn;
 BufferedImage image;
 Graphics2D g2d;
 int 	centreX, centreY,
@@ -57,21 +58,30 @@ double	ratio;
 		//Toolkit.;//.       .getClass().getResource("/astrolabe/Mercator-projection.jpg");
 		//this.image=new ImageIcon(getToolkit().getImage("Mercator-projection.jpg")).getImage();
 		try {
-      URL url = new URL("https://github.com/bendeg/astrolabe/raw/master/src/Mercator-projection.jpg");
+      this.url = new URL("https://github.com/bendeg/astrolabe/raw/master/Mercator-projection.jpg");
 			
-			HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-		    //int responseCode = httpConn.getResponseCode();
+			this.httpConn = (HttpURLConnection) url.openConnection();
+		  //int responseCode = httpConn.getResponseCode();
 			InputStream in = httpConn.getInputStream();
     	System.out.println("Chargement de la carte Mercator...");
 	    this.image=ImageIO.read(in);
 
+	    //Sauvegarde de l'image dans le répertoire courant
 	    File mercatorProjection = new File("Mercator-projection.jpg"); 
-      //BufferedImage bf = this.image.toBufferedImage(mercatorProjection);
 	    ImageIO.write(this.image, "JPG", mercatorProjection);
 	    
 		}
 		catch (IOException x) {
 		    System.err.println(x);
+		    System.out.println("Image 'Mercator-projection' non trouvée à l'URL : " + this.url.toExternalForm());
+		    System.out.println("Lecture du fichier local...");
+		    try {
+  	      File mercatorProjection = new File("Mercator-projection.jpg"); 
+  	      this.image = ImageIO.read(mercatorProjection);
+		    }
+		    catch(IOException ioe) {
+	        System.err.println(ioe);		      
+		    }
 		}
 		
 		this.setPreferredSize(new Dimension(this.image.getWidth(this), this.image.getHeight(this)));
