@@ -33,7 +33,7 @@ OR
 <br>
 Right-clic on one to know its name, ra/dec, hour angle, position in a polar scope
 <br>
-Executable JAR file (Java 8) : http://shamans.be/astrolabe_java8_x64.jar
+Executable JAR file (Java 8)
 <br>
 Extract 4 text files from JAR file in same directory as jar file :
 <br>stars3017-alluvb-name.txt
