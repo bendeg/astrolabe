@@ -595,16 +595,16 @@ public double calculateSun() {
 	        e = Math.sqrt(2 * f - f * f), u;
 	  
 	  if (this.astro.coordGeo.getAltitude() == 0.0) {
-	    this.rhoSinLat = b * b * Math.sin(this.astro.coordGeo.getLatitude());
-	    this.rhoCosLat = a * a * Math.cos(this.astro.coordGeo.getLatitude());
+	    this.rhoSinLat = b * b * Math.sin(this.astro.coordGeo.getLatitude()*Math.PI/180.0);
+	    this.rhoCosLat = a * a * Math.cos(this.astro.coordGeo.getLatitude()*Math.PI/180.0);
 	  }
 	  else {
-	    u = Math.atan2(b * Math.tan(this.astro.coordGeo.getLatitude()), a);
-	    this.rhoSinLat = (b / a) * Math.asin(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.sin(this.astro.coordGeo.getLatitude()));
-	    this.rhoCosLat = Math.cos(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.cos(this.astro.coordGeo.getLatitude()));
+	    u = Math.atan2(b * Math.tan(this.astro.coordGeo.getLatitude()*Math.PI/180.0), a);
+	    this.rhoSinLat = (b / a) * Math.sin(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.sin(this.astro.coordGeo.getLatitude()*Math.PI/180.0));
+	    this.rhoCosLat = Math.cos(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.cos(this.astro.coordGeo.getLatitude()*Math.PI/180.0));
 	  }
 	  
-	  //System.out.println("Calculs = rhoSinLat et rhosCosLat :" + this.rhoSinLat + ", " + this.rhoCosLat);
+	  System.out.println("Calculs = rhoSinLat et rhosCosLat :" + this.rhoSinLat + ", " + this.rhoCosLat);
 	}
 	
 	public double calculatePrecession(double startEpoch, double finalEpoch) {
