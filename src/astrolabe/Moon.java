@@ -165,31 +165,31 @@ public class Moon {
 		// Transformation en coordonn�es EQUATORIALES
 
 		//mean longitude of the Sun and the Moon (L')
-		this.periodicTerms=new double[]{218.3164477, 481267.88123421, -0.0015786, 1.0/538841, -1.0/65194000};
+		this.periodicTerms=new double[]{218.3164477, 481267.88123421, -0.0015786, 1.0/538841.0, -1.0/65194000.0};
 		this.moonMeanLongitude = this.astro.calc.calculatePolynomial(this.astro.calc.T, this.periodicTerms, 0);
 		this.moonMeanLongitude = ((this.moonMeanLongitude%360.0)+360.0)%360.0;
 		//System.out.println("moonMeanLongitude = "+this.moonMeanLongitude);
 	
 		//Mean elongation of the Moon from the Sun (D)
-		this.periodicTerms=new double[]{297.8501921, 445267.1114034, -0.0018819, 1.0/545868, -1.0/113065000};
+		this.periodicTerms=new double[]{297.8501921, 445267.1114034, -0.0018819, 1.0/545868.0, -1.0/113065000.0};
 		this.moonMeanElongationFromSun =this.astro.calc.calculatePolynomial(this.astro.calc.T, this.periodicTerms, 0); 
 		this.moonMeanElongationFromSun = ((this.moonMeanElongationFromSun%360.0)+360.0)%360.0;
 		//System.out.println("moonMeanElongationFromSun = "+this.moonMeanElongationFromSun);
 		
 		//Mean anomaly of the Sun (M)
-		this.periodicTerms=new double[]{357.5291092, 35999.0502909, -0.0001536, 1.0/24490000};
+		this.periodicTerms=new double[]{357.5291092, 35999.0502909, -0.0001536, 1.0/24490000.0};
 		this.moonMeanAnomalySun=this.astro.calc.calculatePolynomial(this.astro.calc.T, this.periodicTerms, 0);
 		this.moonMeanAnomalySun = ((this.moonMeanAnomalySun%360.0)+360.0)%360.0;
 		//System.out.println("moonMeanAnomalySun = "+this.moonMeanAnomalySun);
 		
 		//Mean anomaly of the Moon (M')
-		this.periodicTerms=new double[]{134.9633964, 477198.8675055,	0.0087414, 1.0/69699, -1.0/14712000};
+		this.periodicTerms=new double[]{134.9633964, 477198.8675055,	0.0087414, 1.0/69699.0, -1.0/14712000.0};
 		this.moonMeanAnomaly=this.astro.calc.calculatePolynomial(this.astro.calc.T, this.periodicTerms, 0);
 		this.moonMeanAnomaly = ((this.moonMeanAnomaly%360.0)+360.0)%360.0;
 		//System.out.println("moonMeanAnomaly = "+this.moonMeanAnomaly);
 		
 		//Moon's argument of latitude (F)
-		this.periodicTerms=new double[]{93.2720950, 483202.0175233, -0.0036539, -1.0/3526000, 1.0/863310000};
+		this.periodicTerms=new double[]{93.2720950, 483202.0175233, -0.0036539, -1.0/3526000.0, 1.0/863310000.0};
 		this.moonArgumentLatitude=this.astro.calc.calculatePolynomial(this.astro.calc.T, this.periodicTerms, 0);
 		this.moonArgumentLatitude = ((this.moonArgumentLatitude%360.0)+360.0)%360.0;
 		//System.out.println("moonArgumentLatitude = "+this.moonArgumentLatitude);
@@ -324,7 +324,7 @@ public class Moon {
 		this.sumB+=175.0*Math.sin(Math.toRadians(this.A1 - this.moonArgumentLatitude));
 		this.sumB+=175.0*Math.sin(Math.toRadians(this.A1 + this.moonArgumentLatitude));
 		this.sumB+=127.0*Math.sin(Math.toRadians(this.moonMeanLongitude - this.moonMeanAnomaly));
-		this.sumB+=115.0*Math.sin(Math.toRadians(this.moonMeanLongitude + this.moonMeanAnomaly));
+		this.sumB+=-115.0*Math.sin(Math.toRadians(this.moonMeanLongitude + this.moonMeanAnomaly));
 		//System.out.println("SumL= "+this.sumL+" SumR= "+this.sumR+" SumB= "+this.sumB);
 		
 		//The coordinates of the Moon are then given by
@@ -334,7 +334,9 @@ public class Moon {
 		//System.out.println("Moon longitude = "+this.moonGeoLambda);
 		//System.out.println("Moon latitude = "+this.moonGeoBeta);
 		//System.out.println("Earth-Moon distance = "+this.earthMoonDistance);
-		
+		this.moonGeoLambda += this.astro.calc.nutationLongitude/3600.0;
+		//System.out.println("Apparent Moon longitude = "+this.moonGeoLambda);
+    
 		//The equatorial horizontal parallax (pi) of the Moon can then be obtained from
 		this.moonEquatorialHorizontalParallax=Math.toDegrees(Math.asin(6378.14/this.earthMoonDistance));
 		//System.out.println("Lune, parallaxe équatoriale horizontale ="+this.astro.calc.angleDecimalToDMS(this.moonEquatorialHorizontalParallax));
@@ -366,7 +368,7 @@ public class Moon {
 	  
 	  //1ère méthode pour déclinaison (formule 40.3)
 	  this.moonDeclination = Math.toDegrees(Math.atan2((Math.sin(this.moonDeclination*Math.PI/180.0) - this.astro.calc.rhoSinLat * Math.sin(this.moonEquatorialHorizontalParallax*Math.PI/180.0)) * Math.cos(deltaRA*Math.PI/180.0),
-	                                                   Math.cos(this.moonDeclination*Math.PI/180.0) - this.astro.calc.rhoCosLat * Math.sin(this.moonEquatorialHorizontalParallax*Math.PI/180.0) * Math.cos(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA)*Math.PI/180.0)));
+	                                                   Math.cos(this.moonDeclination*Math.PI/180.0) - this.astro.calc.rhoCosLat * Math.sin(this.moonEquatorialHorizontalParallax*Math.PI/180.0) * Math.cos(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA-deltaRA)*Math.PI/180.0)));
 
 	  //2ème méthode (formules 40.6 et 40.7)
 //   A = Math.cos(this.moonDeclination*Math.PI/180.0) * Math.sin(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA + deltaRA)*Math.PI/180.0);

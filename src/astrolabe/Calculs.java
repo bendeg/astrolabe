@@ -480,7 +480,7 @@ public double calculateSun() {
 		//The true obliquity of the ecliptic is e = e0 + deltae, where deltae is the nutation in
 		//obliquity
 		this.eclipticTrueObliquity=this.eclipticMeanObliquity+(this.nutationObliquity/3600.0);
-		//System.out.println("eclipticTrueObliquity = "+this.angleDecimalToDMS(this.eclipticTrueObliquity));
+		//System.out.println("eclipticTrueObliquity = "+this.eclipticTrueObliquity);
 		
 		return 0.0;
 	}
@@ -604,7 +604,7 @@ public double calculateSun() {
 	    this.rhoCosLat = Math.cos(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.cos(this.astro.coordGeo.getLatitude()*Math.PI/180.0));
 	  }
 	  
-	  System.out.println("Calculs = rhoSinLat et rhosCosLat :" + this.rhoSinLat + ", " + this.rhoCosLat);
+	  //System.out.println("Calculs = rhoSinLat et rhosCosLat :" + this.rhoSinLat + ", " + this.rhoCosLat);
 	}
 	
 	public double calculatePrecession(double startEpoch, double finalEpoch) {
@@ -845,20 +845,20 @@ double x, y, z;
 	public double calculateEclipticalToRA(double lambda, double beta) {
 		double temp;
 		//TODO atan
-		temp = Math.atan(
+		temp = Math.atan2(
 				((Math.sin(Math.toRadians(lambda))
 					*Math.cos(Math.toRadians(this.eclipticTrueObliquity)))
 					-(Math.tan(Math.toRadians(beta))
 					*Math.sin(Math.toRadians(this.eclipticTrueObliquity)))
 				)
-				/
+				,
 				Math.cos(Math.toRadians(lambda))	
 				);
 		
 		//TODO atan RA
-		if(Math.cos(Math.toRadians(lambda))<0.0)
-			return (Math.toDegrees(temp)+180.0)%360.0;
-		else
+//		if(Math.cos(Math.toRadians(lambda))<0.0)
+//			return (Math.toDegrees(temp)+180.0)%360.0;
+//		else
 			return (Math.toDegrees(temp)+360)%360.0;
 	}
 
