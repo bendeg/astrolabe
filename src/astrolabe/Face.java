@@ -92,9 +92,12 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		this.astro.tPlanetes.populate();
 		
 		this.astro.capricorne=this.centreY-(this.getPreferredSize().getHeight()/10.0);
-		astro.equateur=astro.capricorne/Math.tan(Math.toRadians(45.0+23.5/2.0));
-		astro.cancer=astro.equateur*Math.tan(Math.toRadians(45.0-23.5/2.0));
-		astro.ecliptique=((astro.capricorne+astro.cancer)/2.0);
+		//astro.equateur=astro.capricorne/Math.tan(Math.toRadians(45.0+23.5/2.0));
+		astro.equateur=astro.capricorne/Math.tan(Math.toRadians(45.0+this.astro.calc.eclipticTrueObliquity/2.0));
+    //astro.cancer=astro.equateur*Math.tan(Math.toRadians(45.0-23.5/2.0));
+    astro.cancer=astro.equateur*Math.tan(Math.toRadians(45.0-this.astro.calc.eclipticTrueObliquity/2.0));
+    astro.ecliptique=((astro.capricorne+astro.cancer)/2.0);
+		
 		//System.out.println(astro.capricorne+" -- "+astro.equateur+" -- "+astro.cancer);
 		
 		
