@@ -34,7 +34,7 @@ static int
 
 
 static double[][] paramDatums=
-{		//demi-grand axe "a", applatissement inverse "f", demi-petit axe "b", eccentricité au carré "e2"
+{		//demi-grand axe "a", applatissement inverse "f", demi-petit axe "b", eccentricitï¿½ au carrï¿½ "e2"
 		{6378137.0,   298.257223563, 6356752.3142451793, 0.00669437999014132},//GEODESY_REFERENCE_ELLIPSE_WGS84,                          
 		{6377563.396, 299.3249647,   6356256.9092444032, 0.00667053999776051},//GEODESY_REFERENCE_ELLIPSE_AIRY,                           
 		{6377340.189, 299.3249647,   6356034.4479456525, 0.00667053999776060},//GEODESY_REFERENCE_ELLIPSE_MODIFED_AIRY,                   
@@ -62,8 +62,8 @@ public boolean GEODESY_ConvertGeodeticCurvilinearToEarthFixedCartesianCoordinate
 	double N;      // prime vertical radius of curvature [m]
 	double sinlat; // sin of the latitude
 	double dtmp;   // temp
-	double latitude=Math.toRadians(coordonneeGeographique.latitude);
-	double longitude=Math.toRadians(coordonneeGeographique.longitude);
+	double latitude=Math.toRadians(coordonneeGeographique.getLatitude());
+	double longitude=Math.toRadians(coordonneeGeographique.getLongitude());
 	
 	if(referenceEllipse <0 || referenceEllipse>15 || latitude<-Math.PI/2 || latitude>Math.PI/2)
 		   return false;
@@ -74,12 +74,12 @@ public boolean GEODESY_ConvertGeodeticCurvilinearToEarthFixedCartesianCoordinate
 	
 	sinlat = Math.sin(latitude);             
 	N = a / Math.sqrt(1.0 - e2 * sinlat*sinlat );      
-	dtmp = (N + coordonneeGeographique.altitude) * Math.cos(latitude);
+	dtmp = (N + coordonneeGeographique.getAltitude()) * Math.cos(latitude);
 	
 	//System.out.println("GEODESY - user lat="+coordonneeGeographique.latitude+" lon="+coordonneeGeographique.longitude+" alt=" +coordonneeGeographique.altitude);
-	coordonneeGeographique.coordonneeCartesienne=Point3D.ZERO.add(	dtmp * Math.cos(longitude),
+	coordonneeGeographique.setCoordonneeCartesienne(Point3D.ZERO.add(	dtmp * Math.cos(longitude),
 			   														dtmp * Math.sin(longitude),
-			   														( (1.0 - e2)*N + coordonneeGeographique.altitude ) * sinlat);
+			   														( (1.0 - e2)*N + coordonneeGeographique.getAltitude()) * sinlat));
 	return true;
 }
 
@@ -112,7 +112,7 @@ public boolean GEODESY_ConvertEarthFixedCartesianToGeodeticCurvilinearCoordinate
    }
    */
    
-   if( coordonneeGeographique.coordonneeCartesienne.getX() == 0.0 && coordonneeGeographique.coordonneeCartesienne.getY() == 0.0 ) 
+   if( coordonneeGeographique.getCoordonneeCartesienne().getX() == 0.0 && coordonneeGeographique.getCoordonneeCartesienne().getY() == 0.0 ) 
    {
      // at a pole    
      // most likely to happen while using a simulator
@@ -120,29 +120,29 @@ public boolean GEODESY_ConvertEarthFixedCartesianToGeodeticCurvilinearCoordinate
      // longitude is really unknown
      lon = 0.0; 
      
-     if( coordonneeGeographique.coordonneeCartesienne.getZ() < 0 )
+     if( coordonneeGeographique.getCoordonneeCartesienne().getZ() < 0 )
      {
-       hgt = -coordonneeGeographique.coordonneeCartesienne.getZ() - b;
+       hgt = -coordonneeGeographique.getCoordonneeCartesienne().getZ() - b;
        lat = -HALFPI;
      }
      else
      {
-       hgt = coordonneeGeographique.coordonneeCartesienne.getZ() - b;
+       hgt = coordonneeGeographique.getCoordonneeCartesienne().getZ() - b;
        lat = HALFPI;
      }
    }
    else
    {
-     p = Math.sqrt( coordonneeGeographique.coordonneeCartesienne.getX()*coordonneeGeographique.coordonneeCartesienne.getX()
-    		 + coordonneeGeographique.coordonneeCartesienne.getY()*coordonneeGeographique.coordonneeCartesienne.getY() );
+     p = Math.sqrt( coordonneeGeographique.getCoordonneeCartesienne().getX()*coordonneeGeographique.getCoordonneeCartesienne().getX()
+    		 + coordonneeGeographique.getCoordonneeCartesienne().getY()*coordonneeGeographique.getCoordonneeCartesienne().getY() );
  
      // unique solution for longitude
      // best formula for any longitude and applies well near the poles
      // pp. 178 reference [2]
-     lon = 2.0 * Math.atan2( coordonneeGeographique.coordonneeCartesienne.getY() , ( coordonneeGeographique.coordonneeCartesienne.getX() + p ) );
+     lon = 2.0 * Math.atan2( coordonneeGeographique.getCoordonneeCartesienne().getY() , ( coordonneeGeographique.getCoordonneeCartesienne().getX() + p ) );
      
      // set approximate initial latitude assuming a height of 0.0
-     lat = Math.atan( coordonneeGeographique.coordonneeCartesienne.getZ() / (p * (1.0 - e2)) );
+     lat = Math.atan( coordonneeGeographique.getCoordonneeCartesienne().getZ() / (p * (1.0 - e2)) );
      hgt = 0.0;
      do
      { 
@@ -150,14 +150,14 @@ public boolean GEODESY_ConvertEarthFixedCartesianToGeodeticCurvilinearCoordinate
        sinlat = Math.sin(lat);
        N   = a / Math.sqrt( 1.0 - e2*sinlat*sinlat );
        hgt = p / Math.cos(lat) - N;
-       lat = Math.atan( coordonneeGeographique.coordonneeCartesienne.getZ() / (p * ( 1.0 - e2*N/(N + hgt) )) );      
+       lat = Math.atan( coordonneeGeographique.getCoordonneeCartesienne().getZ() / (p * ( 1.0 - e2*N/(N + hgt) )) );      
  
      } while( Math.abs( hgt - dtmp ) > 0.0001 );  // 0.1 mm convergence for height
    }
  
-   coordonneeGeographique.latitude  = Math.toDegrees(lat);
-   coordonneeGeographique.longitude = Math.toDegrees(lon);  
-   coordonneeGeographique.altitude    = hgt;
+   coordonneeGeographique.setLatitude(Math.toDegrees(lat));
+   coordonneeGeographique.setLongitude(Math.toDegrees(lon));  
+   coordonneeGeographique.setAltitude(hgt);
    return true;
  }
 
@@ -300,7 +300,7 @@ public boolean GEODESY_RotateVectorFromEarthFixedFrameToLocalGeodeticFrame(
    rotationVector[2] =  coslat*coslon * ecefVector[0]  +  coslat*sinlon * ecefVector[1]  +  sinlat * ecefVector[2];  
  */
    
-   	//faux mais on essaye...voir fichier gps_calcul.pdf dans téléchargements"
+   	//faux mais on essaye...voir fichier gps_calcul.pdf dans tï¿½lï¿½chargements"
    /*
   	rotationVector[0] = - sinlon * ecefVector[0] - coslon*sinlat 	* ecefVector[1] + coslon*coslat * ecefVector[2];
   	rotationVector[1] =   coslon * ecefVector[0] - sinlon*sinlat 	* ecefVector[1] + sinlon*coslat * ecefVector[2];

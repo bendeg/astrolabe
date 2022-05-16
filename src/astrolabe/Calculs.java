@@ -59,6 +59,10 @@ public class Calculs {
 	//double[] stars;
 	boolean initialisation = true;
 	
+	//pour le calcul de la parallaxe
+	double rhoSinLat, rhoCosLat;
+	
+	
 //=======================================================================
 //=======================================================================
 //=======================================================================
@@ -523,6 +527,8 @@ public double calculateSun() {
 	public void calculateAll() {
 		double deltaYears;
 		
+		this.calculateRhoSinLatRhoCosLat();
+		
 		//if(this.currentYear != this.astro.calc.ldt.getYear()) {
 		deltaYears = this.calculatePrecession(2451545.0, this.jd) * 100.0;
 			
@@ -580,6 +586,26 @@ public double calculateSun() {
 		System.out.println("Moon declination = "+astro.moonDeclination+" dms = "+this.angleDecimalToDMS(astro.moonDeclination));
 	}
 	*/
+	
+	public void calculateRhoSinLatRhoCosLat() {
+	  //"Astronomical Algorithms", 2d Edition, page 82
+	  double a = 6378.14,
+	        f = 1 / 298.257,
+	        b = a * (1 - f),
+	        e = Math.sqrt(2 * f - f * f), u;
+	  
+	  if (this.astro.coordGeo.getAltitude() == 0.0) {
+	    this.rhoSinLat = b * b * Math.sin(this.astro.coordGeo.getLatitude());
+	    this.rhoCosLat = a * a * Math.cos(this.astro.coordGeo.getLatitude());
+	  }
+	  else {
+	    u = Math.atan2(b * Math.tan(this.astro.coordGeo.getLatitude()), a);
+	    this.rhoSinLat = (b / a) * Math.asin(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.sin(this.astro.coordGeo.getLatitude()));
+	    this.rhoCosLat = Math.cos(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.cos(this.astro.coordGeo.getLatitude()));
+	  }
+	  
+	  //System.out.println("Calculs = rhoSinLat et rhosCosLat :" + this.rhoSinLat + ", " + this.rhoCosLat);
+	}
 	
 	public double calculatePrecession(double startEpoch, double finalEpoch) {
 		//Chapter21, p.133
@@ -860,7 +886,7 @@ double x, y, z;
 	}
 	
 	public double viseurPolaire(double rightAscension) {
-	  if(this.astro.getLatitude() > 0.0)
+	  if(this.astro.coordGeo.getLatitude() > 0.0)
 	    return ((180.0-this.calculateAngleHoraireFromEquatorial(rightAscension) / 2.0) + 6.0 ) % 12.0;
 	  else
 	    return ((this.calculateAngleHoraireFromEquatorial(rightAscension) / 2.0) + 6.0 ) % 12.0;

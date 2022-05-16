@@ -70,28 +70,13 @@ static final long serialVersionUID=1;
 	Vector<String> starsnames;//index de toutes les étoiles
 	String[][] asterismes;
 	
-	public double getLongitude() {
-		return this.coordGeo.longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.coordGeo.longitude = longitude;
-	}
-
-	public double getLatitude() {
-		return this.coordGeo.latitude;
-	}
-
-	public void setLatitude(double latitude) {
-		this.coordGeo.latitude = latitude;
-	}
 
 	public Astrolabe ()
 	{
 		int i, j;
 		this.coordGeo=new CoordonneeGeographique();
-		this.coordGeo.coordonneeCartesienne=new Point3D(0.0, 0.0, 0.0);
-		this.coordGeo.altitude=60.0;
+		this.coordGeo.setCoordonneeCartesienne(new Point3D(0.0, 0.0, 0.0));
+		this.coordGeo.setAltitude(60.0);
 		this.geodesy=new Geodesy();
 		this.gps=new Gps(this);
 		
@@ -245,24 +230,24 @@ static final long serialVersionUID=1;
 		
 		param=new Parametres(this);
 		this.param.deserialiser();
-		this.coordGeo.latitude=this.home.getLatitude();
-		this.param.textFieldLatitude.setText(String.valueOf(this.coordGeo.latitude));
-		this.coordGeo.longitude=this.home.getLongitude();
-		this.param.textFieldLongitude.setText(String.valueOf(this.coordGeo.longitude));
+		this.coordGeo.setLatitude(this.home.getLatitude());
+		this.param.textFieldLatitude.setText(String.valueOf(this.coordGeo.getLatitude()));
+		this.coordGeo.setLongitude(this.home.getLongitude());
+		this.param.textFieldLongitude.setText(String.valueOf(this.coordGeo.getLongitude()));
 		this.cutoffAngle=this.home.cutoff;
 		this.param.textFieldCutoff.setText(String.valueOf(this.cutoffAngle));
 		
 		//v�rification coordonn�es cart�siennes de l'observateur
 		
-		System.out.println("latitude="+this.coordGeo.latitude+" longitude="+this.coordGeo.longitude+" altitude="+this.coordGeo.altitude);
+		System.out.println("latitude="+this.coordGeo.getLatitude()+" longitude="+this.coordGeo.getLongitude()+" altitude="+this.coordGeo.getAltitude());
 		this.geodesy.GEODESY_ConvertGeodeticCurvilinearToEarthFixedCartesianCoordinates(
 				   0,  //0=WGS1984
 				   this.coordGeo
 				   );
 		
-		System.out.println("X Obs ="+this.coordGeo.coordonneeCartesienne.getX());
-		System.out.println("Y Obs ="+this.coordGeo.coordonneeCartesienne.getY());
-		System.out.println("Z Obs ="+this.coordGeo.coordonneeCartesienne.getZ());
+		System.out.println("X Obs ="+this.coordGeo.getCoordonneeCartesienne().getX());
+		System.out.println("Y Obs ="+this.coordGeo.getCoordonneeCartesienne().getY());
+		System.out.println("Z Obs ="+this.coordGeo.getCoordonneeCartesienne().getZ());
 		
 
 		affichage = new Affichage(this);

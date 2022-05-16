@@ -432,7 +432,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 }
 	
 	private void dessinerTympan() {
-		double distance, rayon, phi=this.astro.getLatitude(), hauteur,
+		double distance, rayon, phi=this.astro.coordGeo.getLatitude(), hauteur,
 				horizondistance, horizonrayon,
 				centrezenith, estouestrayon, droitecentres,
 				distancefoyer, rayonvertical, azimut;
