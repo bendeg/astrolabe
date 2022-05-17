@@ -13,7 +13,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.*;
 
 public class Affichage extends JPanel {
 	static final long serialVersionUID=1;
@@ -23,7 +22,7 @@ public class Affichage extends JPanel {
 	transient Graphics2D g2d;	
 	JCheckBox tsl, tympan, almuvert5, almuvert1, astre, noeudASC, noeudDESC, satGPS,
 	          checkMercure, checkVenus, checkMars, checkJupiter, checkSaturne, checkUranus, checkNeptune,
-	          checkFreeLocation, asterismes;
+	          checkFreeLocation, asterismes, checkSoleil, checkPAS, checkLune;
 	JSlider magSlider;
 	JLabel magLabel=new JLabel("Magnitude"),
 	       astreAD=new JLabel("    Ascension droite (HMS)"),
@@ -334,7 +333,31 @@ public class Affichage extends JPanel {
     this.gbc.gridy=19;
     this.gb.setConstraints(this.asterismes, this.gbc);
     this.add(this.asterismes);
-}
+
+    checkSoleil=new JCheckBox("Soleil", true);
+    checkSoleil.setBackground(Color.BLACK);
+    checkSoleil.setForeground(Color.YELLOW);
+    this.gbc.gridx=0;
+    this.gbc.gridy=20;
+    this.gb.setConstraints(this.checkSoleil, this.gbc);
+    this.add(checkSoleil);
+
+    checkPAS=new JCheckBox("P.A.S. (point anti-solaire)", true);
+    checkPAS.setBackground(Color.BLACK);
+    checkPAS.setForeground(Color.YELLOW);
+    this.gbc.gridx=1;
+    this.gbc.gridy=20;
+    this.gb.setConstraints(this.checkPAS, this.gbc);
+    this.add(checkPAS);
+
+    checkLune=new JCheckBox("Lune", true);
+    checkLune.setBackground(Color.BLACK);
+    checkLune.setForeground(Color.GRAY);
+    this.gbc.gridx=0;
+    this.gbc.gridy=21;
+    this.gb.setConstraints(this.checkLune, this.gbc);
+    this.add(checkLune);
+	}
 
 	public void paintComponent(Graphics g){
 		g2d = (Graphics2D) g;

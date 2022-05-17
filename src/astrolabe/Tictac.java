@@ -43,6 +43,28 @@ public class Tictac extends TimerTask {
 		this.astro.calc.fuseau=this.astro.calc.ldt.getOffset().getTotalSeconds()/3600.0;
 		//System.out.println("Fuseau = GMT+"+this.astro.calc.fuseau);
 
+//  if (this.astro.anim.dJourT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.dJourT.setText("0");
+//  else this.astro.anim.dJourT.setText(this.astro.anim.dJourT.getText().split("[^0-9]")[0]);
+//  if (this.astro.anim.dHeureT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.dHeureT.setText("0");
+//  else this.astro.anim.dHeureT.setText(this.astro.anim.dHeureT.getText().split("[^0-9]")[0]);
+//  if (this.astro.anim.dMinT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.dMinT.setText("0");
+//  else this.astro.anim.dMinT.setText(this.astro.anim.dMinT.getText().split("[^0-9]")[0]);
+//  if (this.astro.anim.dSecT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.dSecT.setText("0");
+//  else this.astro.anim.dSecT.setText(this.astro.anim.dSecT.getText().split("[^0-9]")[0]);
+//
+//  if (this.astro.anim.anT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.anT.setText("0");
+//  else this.astro.anim.anT.setText(this.astro.anim.anT.getText().split("[^0-9]")[0]);
+//  if (this.astro.anim.moisT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.moisT.setText("0");
+//  else this.astro.anim.moisT.setText(this.astro.anim.moisT.getText().split("[^0-9]")[0]);
+//  if (this.astro.anim.jourT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.jourT.setText("0");
+//  else this.astro.anim.jourT.setText(this.astro.anim.jourT.getText().split("[^0-9]")[0]);
+//  if (this.astro.anim.heureT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.heureT.setText("0");
+//  else this.astro.anim.heureT.setText(this.astro.anim.heureT.getText().split("[^0-9]")[0]);
+//  if (this.astro.anim.minT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.minT.setText("0");
+//  else this.astro.anim.minT.setText(this.astro.anim.minT.getText().split("[^0-9]")[0]);
+//  if (this.astro.anim.secT.getText().split("[^0-9]")[0].compareTo("") == 0) this.astro.anim.secT.setText("0");
+//  else this.astro.anim.secT.setText(this.astro.anim.secT.getText().split("[^0-9]")[0]);
+		
 		if(!this.astro.anim.automode.isSelected()){
 		  //Mode "manuel" est sélectionné (changement de date manuel)
       //this.astro.calc.ldt=java.time.LocalDateTime.now();
@@ -61,9 +83,12 @@ public class Tictac extends TimerTask {
 		  }
 		  else {
         this.astro.calc.ldt=this.astro.calc.ldt.plusDays(Long.parseLong(this.astro.anim.dJourT.getText()));
-  			this.astro.calc.ldt=this.astro.calc.ldt.plusHours(Long.parseLong(this.astro.anim.dHeureT.getText()));
-  			this.astro.calc.ldt=this.astro.calc.ldt.plusMinutes(Long.parseLong(this.astro.anim.dMinT.getText()));
-  			this.astro.calc.ldt=this.astro.calc.ldt.plusSeconds(Long.parseLong(this.astro.anim.dSecT.getText()));
+        
+        this.astro.calc.ldt=this.astro.calc.ldt.plusHours(Long.parseLong(this.astro.anim.dHeureT.getText()));
+        
+        this.astro.calc.ldt=this.astro.calc.ldt.plusMinutes(Long.parseLong(this.astro.anim.dMinT.getText()));
+  			
+  			this.astro.calc.ldt=this.astro.calc.ldt.plusSeconds(Long.parseLong(this.astro.anim.dSecT.getText().split("[^0-9]")[0]));
   		}
 			this.astro.anim.anT.setText(String.valueOf(this.astro.calc.ldt.getYear()));
 			this.astro.anim.moisT.setText(String.valueOf(this.astro.calc.ldt.getMonthValue()));
@@ -87,6 +112,10 @@ public class Tictac extends TimerTask {
 		catch(DateTimeException dte){
       System.err.println(dte.toString());
 			System.out.println("Erreur de format de date : "+dte.toString());
+		}
+		catch(ArrayIndexOutOfBoundsException aioobe) {
+      System.err.println(aioobe.toString());
+      System.out.println("Erreur indice tableau : "+ aioobe.toString());		  
 		}
 		
 		if(this.astro.calc.ldt.getZone().getRules().isDaylightSavings(this.astro.calc.ldt.toInstant()))
