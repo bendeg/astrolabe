@@ -44,6 +44,7 @@ public class ModeAnimation extends JPanel {
 	
 	public ModeAnimation(Astrolabe a) {
 	  this.periodesTerre.put("Jour Sidéral", "86164");
+    this.periodesTerre.put("Jour officiel (24h)", "86400");
 	  
 	  this.periodesLune.put("Lune : Mois draconitique", "2351136");
 	  this.periodesLune.put("Lune : Mois tropique", "2360584");//normalement en moyenne : 2360584,7
@@ -62,7 +63,7 @@ public class ModeAnimation extends JPanel {
        @Override
        public void actionPerformed(ActionEvent e) {
           //System.out.println(e.toString());
-          System.out.println("Value: " + periodesAll.get(periodes.getSelectedItem()));
+          //System.out.println("Value: " + periodesAll.get(periodes.getSelectedItem()));
           astro.anim.dJourT.setText("0");
           astro.anim.dHeureT.setText("0");
           astro.anim.dMinT.setText("0");
@@ -198,7 +199,7 @@ public class ModeAnimation extends JPanel {
 		this.gb.setConstraints(this.dHeureL, this.gbc);
 		this.add(dHeureL);
 
-		this.dHeureT=new JTextField("23");
+		this.dHeureT=new JTextField("0");
     this.dHeureT.setToolTipText("Nombre entier unqiuement !");
     this.dHeureT.setVisible(true);
 		this.dHeureT.setBackground(Color.BLACK);
@@ -216,7 +217,7 @@ public class ModeAnimation extends JPanel {
 		this.gb.setConstraints(this.dMinL, this.gbc);
 		this.add(dMinL);
 
-		this.dMinT=new JTextField("56");
+		this.dMinT=new JTextField("0");
     this.dMinT.setToolTipText("Nombre entier unqiuement !");
     this.dMinT.setVisible(true);
 		this.dMinT.setBackground(Color.BLACK);
@@ -234,7 +235,7 @@ public class ModeAnimation extends JPanel {
 		this.gb.setConstraints(this.dSecL, this.gbc);
 		this.add(dSecL);
 
-		this.dSecT=new JTextField("4");
+		this.dSecT=new JTextField("0");
 		this.dSecT.setToolTipText("Nombre entier unqiuement !");
     this.dSecT.setVisible(true);
 		this.dSecT.setBackground(Color.BLACK);
