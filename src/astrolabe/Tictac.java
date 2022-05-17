@@ -81,9 +81,11 @@ public class Tictac extends TimerTask {
 		}
 		}
 		catch(NumberFormatException nfe) {
+		  System.err.println(nfe.toString());
 			System.out.println("Erreur de format nombre : "+nfe.toString());
 		}
 		catch(DateTimeException dte){
+      System.err.println(dte.toString());
 			System.out.println("Erreur de format de date : "+dte.toString());
 		}
 		

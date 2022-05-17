@@ -90,12 +90,19 @@ public class ModeAnimation extends JPanel {
 					a.anim.reinit.setBackground(Color.GRAY);
 					if(source.isSelected()) {
 						source.setText("Stop !");
-						a.anim.anT.setVisible(false);
-						a.anim.moisT.setVisible(false);
-						a.anim.jourT.setVisible(false);
-		        a.anim.heureT.setVisible(false);
-		        a.anim.minT.setVisible(false);
-		        a.anim.secT.setVisible(false);
+//						a.anim.anT.setVisible(false);
+//						a.anim.moisT.setVisible(false);
+//						a.anim.jourT.setVisible(false);
+//		        a.anim.heureT.setVisible(false);
+//		        a.anim.minT.setVisible(false);
+//		        a.anim.secT.setVisible(false);
+
+		        a.anim.anT.setVisible(true);
+            a.anim.moisT.setVisible(true);
+            a.anim.jourT.setVisible(true);
+            a.anim.heureT.setVisible(true);
+            a.anim.minT.setVisible(true);
+            a.anim.secT.setVisible(true);
 					}
 					else {
 						source.setText("Animer !");
@@ -114,6 +121,8 @@ public class ModeAnimation extends JPanel {
 		this.add(automode);
 		
 		//delta jour
+    this.dJourL.setBackground(Color.BLACK);
+    this.dJourL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=1;
 		this.gb.setConstraints(this.dJourL, this.gbc);
@@ -128,6 +137,8 @@ public class ModeAnimation extends JPanel {
 		this.add(dJourT);
 
 		//delta heure
+    this.dHeureL.setBackground(Color.BLACK);
+    this.dHeureL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=2;
 		this.gb.setConstraints(this.dHeureL, this.gbc);
@@ -142,6 +153,8 @@ public class ModeAnimation extends JPanel {
 		this.add(dHeureT);
 
 		//delta Minutes
+    this.dMinL.setBackground(Color.BLACK);
+    this.dMinL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=3;
 		this.gb.setConstraints(this.dMinL, this.gbc);
@@ -156,7 +169,9 @@ public class ModeAnimation extends JPanel {
 		this.add(dMinT);
 
 		//delta seconde
-		this.gbc.gridx=0;
+    this.dSecL.setBackground(Color.BLACK);
+    this.dSecL.setForeground(Color.RED);
+  	this.gbc.gridx=0;
 		this.gbc.gridy=4;
 		this.gb.setConstraints(this.dSecL, this.gbc);
 		this.add(dSecL);
@@ -170,6 +185,8 @@ public class ModeAnimation extends JPanel {
 		this.add(dSecT);
 		
 		//année
+    this.anL.setBackground(Color.BLACK);
+    this.anL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=5;
 		this.gb.setConstraints(this.anL, this.gbc);
@@ -181,10 +198,12 @@ public class ModeAnimation extends JPanel {
 		this.gbc.gridx=1;
 		this.gbc.gridy=5;
 		this.gb.setConstraints(this.anT, this.gbc);
-		this.anT.setVisible(false);
+		this.anT.setVisible(true);
 		this.add(anT);
 		
 		//mois
+    this.moisL.setBackground(Color.BLACK);
+    this.moisL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=6;
 		this.gb.setConstraints(this.moisL, this.gbc);
@@ -196,10 +215,12 @@ public class ModeAnimation extends JPanel {
 		this.gbc.gridx=1;
 		this.gbc.gridy=6;
 		this.gb.setConstraints(this.moisT, this.gbc);
-		this.moisT.setVisible(false);
+		this.moisT.setVisible(true);
 		this.add(moisT);
 		
 		//jour
+    this.jourL.setBackground(Color.BLACK);
+    this.jourL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=7;
 		this.gb.setConstraints(this.jourL, this.gbc);
@@ -211,10 +232,12 @@ public class ModeAnimation extends JPanel {
 		this.gbc.gridx=1;
 		this.gbc.gridy=7;
 		this.gb.setConstraints(this.jourT, this.gbc);
-		this.jourT.setVisible(false);
+		this.jourT.setVisible(true);
 		this.add(jourT);
 		
 		//heure
+    this.heureL.setBackground(Color.BLACK);
+    this.heureL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=8;
 		this.gb.setConstraints(this.heureL, this.gbc);
@@ -226,10 +249,12 @@ public class ModeAnimation extends JPanel {
 		this.gbc.gridx=1;
 		this.gbc.gridy=8;
 		this.gb.setConstraints(this.heureT, this.gbc);
-		this.heureT.setVisible(false);
+		this.heureT.setVisible(true);
 		this.add(heureT);
 
 		//minute
+    this.minL.setBackground(Color.BLACK);
+    this.minL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=9;
 		this.gb.setConstraints(this.minL, this.gbc);
@@ -241,10 +266,12 @@ public class ModeAnimation extends JPanel {
 		this.gbc.gridx=1;
 		this.gbc.gridy=9;
 		this.gb.setConstraints(this.minT, this.gbc);
-		this.minT.setVisible(false);
+		this.minT.setVisible(true);
 		this.add(minT);
 
 		//seconde
+    this.secL.setBackground(Color.BLACK);
+    this.secL.setForeground(Color.RED);
 		this.gbc.gridx=0;
 		this.gbc.gridy=10;
 		this.gb.setConstraints(this.secL, this.gbc);
@@ -256,7 +283,7 @@ public class ModeAnimation extends JPanel {
 		this.gbc.gridx=1;
 		this.gbc.gridy=10;
 		this.gb.setConstraints(this.secT, this.gbc);
-		this.secT.setVisible(false);
+		this.secT.setVisible(true);
 		this.add(secT);
 
 	}

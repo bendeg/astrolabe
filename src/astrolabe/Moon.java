@@ -1,5 +1,18 @@
 package astrolabe;
 
+//https://fr.wikipedia.org/wiki/Mois_lunaire#Mois_sid%C3%A9ral
+//Le mois lunaire sidéral vaut environ 27,321 661 547 jours ~= 27j 7h 43m 11,5576608s
+//Le mois synodique vaut environ 29,530 588 85 jours ~= 29j 12h 44m 2,87664s
+//Le mois anomalistique (intervalle de temps entre deux périgées) vaut en moyenne 27,554 550 jours. La précession du grand axe lunaire possède une période de 3 232,6 jours, soit 8,85 ans. 
+//Le mois tropique (retrouver la même longitude écliptique) vaut en moyenne 27,321 582 jours. La précession des équinoxes possède une période d'environ 26 000 ans. 
+//Un mois draconitique (la période entre deux passages de la Lune au même nœud de son orbite ) vaut en moyenne 27,212 221 jours. Le nombre de mois draconitiques excède d'une unité celui des mois sidéraux au bout de 6 793,5 jours, soit 18,6 ans, ce qui correspond au temps mis par les nœuds lunaires pour effectuer une révolution complète sur le plan de l'écliptique.
+//                    jours       secondes      détail
+//Mois draconitique   27,212 20   2351136,0   27 j 05 h 05 min 36,0 s
+//Mois tropique       27,321 58   2360584,7   27 j 07 h 43 min 04,7 s
+//Mois sidéral        27,321 66   2360591,6   27 j 07 h 43 min 11,6 s
+//Mois anomalistique  27,554 64   2380713,0   27 j 13 h 18 min 33,0 s
+//Mois synodique      29,530 59   2551442,9   29 j 12 h 44 min 02,9 s
+
 public class Moon {
 	Astrolabe astro;
 	//Periodic terms for Moon latitude
