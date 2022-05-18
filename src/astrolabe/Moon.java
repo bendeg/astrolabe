@@ -209,7 +209,8 @@ public class Moon {
 		
 		//Longitude of the ascending node of the Moon's mean orbit on the ecliptic, measured
 		//from the mean equinox of the date
-		//If an accuracy of 0':5 in ill/; and of 0': 1 in ll.e are sufficient
+		//"Astronomical Algorithms", 2ed, page 144
+		//If an accuracy of 0".5 in delta psy and of 0".1 in delta epsilon are sufficient
 		//this.periodicTerms=new double[]{125.04452, -1934.136261, 0.0020708, 1/450000};
 		this.moonLongitudeAscendignNode=125.04452-1934.136261*this.astro.calc.T;
 		this.moonLongitudeAscendignNode = ((this.moonLongitudeAscendignNode%360.0)+360.0)%360.0;
@@ -227,11 +228,6 @@ public class Moon {
 		this.luneNoeudDescendantRA=this.astro.calc.calculateEclipticalToRA(this.moonLongitudeAscendignNode+180.0, 0.0);
 		//System.out.println("lune desc node RA = "+this.luneNoeudDescendantRA);
 		
-		//calcul une 2ème fois ???
-		//this.moonMeanLongitude = 218.3165 + 481267.8813*this.astro.calc.T;
-		//this.moonMeanLongitude = ((this.moonMeanLongitude%360.0)+360.0)%360.0;
-		//System.out.println("moonMeanLongitude = "+this.moonMeanLongitude);
-
 		//Three further arguments (again, in degrees) are needed
 		this.A1 = 119.75 + 131.849*this.astro.calc.T;
 		this.A1 = ((this.A1%360.0)+360.0)%360.0;
@@ -347,6 +343,8 @@ public class Moon {
 		//System.out.println("Moon longitude = "+this.moonGeoLambda);
 		//System.out.println("Moon latitude = "+this.moonGeoBeta);
 		//System.out.println("Earth-Moon distance = "+this.earthMoonDistance);
+		
+		//page 343 (exemple 47.a)
 		this.moonGeoLambda += this.astro.calc.nutationLongitude/3600.0;
 		//System.out.println("Apparent Moon longitude = "+this.moonGeoLambda);
     
@@ -362,6 +360,7 @@ public class Moon {
 		this.moonDeclination=this.astro.calc.calculateEclipticalToDeclination(this.moonGeoLambda,  this.moonGeoBeta);
 		//System.out.println("Moon declination = "+this.moonDeclination+" dms = "+this.angleDecimalToDMS(this.moonDeclination));
 		
+		//Correction due à la parallaxe => position apparente change selon la postiion sur Terre
 		this.calculateTopocentricEquatorial();
 		
 		this.moonHauteur=this.astro.calc.calculateHauteurHorizontalFromEquatorial(this.moonRA, this.moonDeclination);
@@ -375,13 +374,21 @@ public class Moon {
 	  //"Astronomical Algorithms", 2nd Edition, page 279
 	  double deltaRA, A, B, C, q;
 	  
-	  deltaRA = Math.toDegrees(Math.atan2(-this.astro.calc.rhoCosLat * Math.sin(this.moonEquatorialHorizontalParallax*Math.PI/180.0) * Math.sin(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA)*Math.PI/180.0),
-	                                    Math.cos(this.moonDeclination*Math.PI/180.0) - this.astro.calc.rhoCosLat * Math.sin(this.moonEquatorialHorizontalParallax*Math.PI/180.0) * Math.cos(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA)*Math.PI/180.0)));
+	  deltaRA = Math.toDegrees(
+	              Math.atan2(
+	                  -this.astro.calc.rhoCosLat * Math.sin(Math.toRadians(this.moonEquatorialHorizontalParallax)) * Math.sin(Math.toRadians(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA))),
+                    Math.cos(Math.toRadians(this.moonDeclination)) - this.astro.calc.rhoCosLat * Math.sin(Math.toRadians(this.moonEquatorialHorizontalParallax)) * Math.cos(Math.toRadians(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA)))
+	              )
+	            );
 	  this.moonRA += deltaRA;
 	  
 	  //1ère méthode pour déclinaison (formule 40.3)
-	  this.moonDeclination = Math.toDegrees(Math.atan2((Math.sin(this.moonDeclination*Math.PI/180.0) - this.astro.calc.rhoSinLat * Math.sin(this.moonEquatorialHorizontalParallax*Math.PI/180.0)) * Math.cos(deltaRA*Math.PI/180.0),
-	                                                   Math.cos(this.moonDeclination*Math.PI/180.0) - this.astro.calc.rhoCosLat * Math.sin(this.moonEquatorialHorizontalParallax*Math.PI/180.0) * Math.cos(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA-deltaRA)*Math.PI/180.0)));
+	  this.moonDeclination = Math.toDegrees(
+	                          Math.atan2(
+	                              (Math.sin(Math.toRadians(this.moonDeclination)) - this.astro.calc.rhoSinLat * Math.sin(Math.toRadians(this.moonEquatorialHorizontalParallax))) * Math.cos(Math.toRadians(deltaRA)),
+	                               Math.cos(Math.toRadians(this.moonDeclination)) - this.astro.calc.rhoCosLat * Math.sin(Math.toRadians(this.moonEquatorialHorizontalParallax)) * Math.cos(Math.toRadians(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA)))        
+                            )
+	                         );
 
 	  //2ème méthode (formules 40.6 et 40.7)
 //   A = Math.cos(this.moonDeclination*Math.PI/180.0) * Math.sin(this.astro.calc.calculateAngleHoraireFromEquatorial(this.moonRA + deltaRA)*Math.PI/180.0);

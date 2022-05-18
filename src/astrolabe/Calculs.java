@@ -30,7 +30,73 @@ public class Calculs {
 	//deltaT : time difference between TD and UT => deltaT=TD-UT 
 	//jde, td, mjd, siderealTime, T, H,
 	//	deltaT,
-
+	
+	//table 22.A
+	double[] periodicTermsNutationLongitudeObliquity = new double[] {
+	     0,  0,  0,  0,  1, -171996, -174.2, +92025, +8.9,
+	    -2,  0,  0,  2,  2,  -13187,   -1.6,  +5736, -3.1,
+	     0,  0,  0,  2,  2,   -2274,   -0.2,   +977, -0.5,
+	     0,  0,  0,  0,  2,   +2062,   +0.2,   -895, +0.5,
+	     0,  1,  0,  0,  0,   +1426,   -3.4,    +54, -0.1,
+	     0,  0,  1,  0,  0,    +712,   +0.1,     -7,    0,
+	    -2,  1,  0,  2,  2,    -517,   +1.2,   +224, -0.6,
+	     0,  0,  0,  2,  1,    -386,   -0.4,   +200,    0,
+	     0,  0,  1,  2,  2,    -301,      0,   +129, -0.1,
+	    -2, -1,  0,  2,  2,    +217,   -0.5,    -95, +0.3,
+	    -2,  0,  1,  0,  0,    -158,      0,      0,    0,
+	    -2,  0,  0,  2,  1,    +129,   +0.1,    -70,    0, 
+	     0,  0, -1,  2,  2,    +123,      0,    -53,    0,
+	     2,  0,  0,  0,  0,     +63,      0,      0,    0,
+	     0,  0,  1,  0,  1,     +63,   +0.1,    -33,    0,
+	     2,  0, -1,  2,  2,     -59,      0,    +26,    0,
+	     0,  0, -1,  0,  1,     -58,   -0.1,    +32,    0,
+	     0,  0,  1,  2,  1,     -51,      0,    +27,    0,
+	    -2,  0,  2,  0,  0,     +48,      0,      0,    0,
+	     0,  0, -2,  2,  1,     +46,      0,    -24,    0,
+	     2,  0,  0,  2,  2,     -38,      0,    +16,    0,
+	     0,  0,  2,  2,  2,     -31,      0,    +13,    0,
+	     0,  0,  2,  0,  0,     +29,      0,      0,    0,
+	    -2,  0,  1,  2,  2,     +29,      0,    -12,    0,
+	     0,  0,  0,  2,  0,     +26,      0,      0,    0,
+	    -2,  0,  0,  2,  0,     -22,      0,      0,    0,
+	     0,  0, -1,  2,  1,     +21,      0,    -10,    0,
+	     0,  2,  0,  0,  0,     +17,   -0.1,      0,    0,
+	     2,  0, -1,  0,  1,     +16,      0,     -8,    0,
+	    -2,  2,  0,  2,  2,     -16,   +0.1,     +7,    0,
+	     0,  1,  0,  0,  1,     -15,      0,     +9,    0,//fin partie1 (page 145)
+	    -2,  0,  1,  0,  1,     -13,      0,     +7,    0,
+	     0, -1,  0,  0,  1,     -12,      0,     +6,    0,
+	     0,  0,  2, -2,  0,     +11,      0,      0,    0,
+	     2,  0, -1,  2,  1,     -10,      0,     +5,    0,
+	     2,  0,  1,  2,  2,      -8,      0,     +3,    0,
+	     0,  1,  0,  2,  2,      +7,      0,     -3,    0,
+	    -2,  1,  1,  0,  0,      -7,      0,      0,    0,
+	     0, -1,  0,  2,  2,      -7,      0,     +3,    0,
+	     2,  0,  0,  2,  1,      -7,      0,     +3,    0,
+	     2,  0,  1,  0,  0,      +6,      0,      0,    0,
+	    -2,  0,  2,  2,  2,      +6,      0,     -3,    0,
+	    -2,  0,  1,  2,  1,      +6,      0,     -3,    0,
+	     2,  0, -2,  0,  1,      -6,      0,     +3,    0,
+	     2,  0,  0,  0,  1,      -6,      0,     +3,    0,
+	     0, -1,  1,  0,  0,      +5,      0,      0,    0,
+	    -2, -1,  0,  2,  1,      -5,      0,     +3,    0,
+	    -2,  0,  0,  0,  1,      -5,      0,     +3,    0,
+	     0,  0,  2,  2,  1,      -5,      0,     +3,    0,
+	    -2,  0,  2,  0,  1,      +4,      0,      0,    0,
+	    -2,  1,  0,  2,  1,      +4,      0,      0,    0,
+	     0,  0,  1, -2,  0,      +4,      0,      0,    0,
+	    -1,  0,  1,  0,  0,      -4,      0,      0,    0,
+	    -2,  1,  0,  0,  0,      -4,      0,      0,    0,
+	     1,  0,  0,  0,  0,      -4,      0,      0,    0,
+	     0,  0,  1,  2,  0,      +3,      0,      0,    0,
+	     0,  0, -2,  2,  2,      -3,      0,      0,    0,
+	    -1, -1,  1,  0,  0,      -3,      0,      0,    0,
+	     0,  1,  1,  0,  0,      -3,      0,      0,    0,
+	     0, -1,  1,  2,  2,      -3,      0,      0,    0,
+	     2, -1, -1,  2,  2,      -3,      0,      0,    0,
+	     0,  0,  3,  2,  2,      -3,      0,      0,    0,
+	     2, -1,  0,  2,  2,      -3,      0,      0,    0
+	};
 	double jd, fuseau, jde, td, mjd, jd0, localSiderealTime, utSiderealtime, T, H, deltaT;
 	double[] periodicTerms;
 	boolean dst;
@@ -453,17 +519,87 @@ public double calculateSun() {
 }
 	
 	public double calculateEcliptic() {
+		double testNutationLongitude, D, M, Mprime, F, omega,
+		        testNutationObliquity;
 		
+		//System.out.println("Calculs - T : " + this.T);
 		//Nutation
 		
+		//test accurate (periodic terms)
+		D = 297.85036 + (445267.111480 * this.T) - (0.0019142 * this.T * this.T) + (this.T * this.T * this.T / 189474.0);
+		D %= 360.0;
+		if(D < 0.0) D += 360.0;
+		//System.out.println("Calculs - D : " + D);
+		M = 357.52772 + (35999.050340 * this.T) - (0.0001603 * this.T * this.T) - (this.T * this.T * this.T / 300000.0);
+    M %= 360.0;
+    if(M < 0.0) M += 360.0;
+		//System.out.println("Calculs - M : " + M);
+		Mprime = 134.96298 + (477198.867398 * this.T) + (0.0086972 * this.T * this.T) + (this.T * this.T * this.T / 56250.0);
+		Mprime %= 360.0;
+    if(Mprime < 0.0) Mprime += 360.0;
+    //System.out.println("Calculs - Mprime : " + Mprime);
+		F = 93.27191 + (483202.017538 * this.T) - (0.0036825 * this.T * this.T) + (this.T * this.T * this.T / 327270.0);
+    F %= 360.0;
+    if(F < 0.0) F += 360.0;
+    //System.out.println("Calculs - F : " + F);
+		omega = 125.04452 - (1934.136261 * this.T) + (0.0020708 * this.T * this.T) + (this.T * this.T * this.T / 450000.0);
+		omega %= 360.0;
+    if(omega < 0.0) omega += 360.0;
+    //System.out.println("Calculs - omega : " + omega);
+		
+		testNutationLongitude = 0.0;
+		//System.out.println("Calculs test long/double : " + (-1.7 * 2) + "/" + (-1.7 * 2.0));
+		//erreur de l'ordre d'un dixième de seconde d'arc (tableau foireux ? vérifié et corrigé une erreur, pas mieux...)
+		for(int i = 0; i < this.periodicTermsNutationLongitudeObliquity.length / 9; i+=9) {
+		  testNutationLongitude +=  
+  		      (this.periodicTermsNutationLongitudeObliquity[i+5] + this.periodicTermsNutationLongitudeObliquity[i+6] * this.T)
+  		      * 
+  		      Math.sin(Math.toRadians(
+  		          D * this.periodicTermsNutationLongitudeObliquity[i]
+  		          +
+                M * this.periodicTermsNutationLongitudeObliquity[i+1]
+  		          +
+                Mprime * this.periodicTermsNutationLongitudeObliquity[i+2]
+                +
+                F * this.periodicTermsNutationLongitudeObliquity[i+3]
+                +
+                omega * this.periodicTermsNutationLongitudeObliquity[i+4])
+  		          ); 
+		}
+		testNutationLongitude /= 10000.0;
+		//System.out.println("Calculs : test accurate delta psy (arc sec): " + testNutationLongitude);
+
+    testNutationObliquity = 0.0;
+    for(int i = 0; i < this.periodicTermsNutationLongitudeObliquity.length / 9; i+=9) {
+      testNutationObliquity +=  
+            (this.periodicTermsNutationLongitudeObliquity[i+7] + this.periodicTermsNutationLongitudeObliquity[i+8] * this.T)
+            * 
+            Math.cos(Math.toRadians(
+                D * this.periodicTermsNutationLongitudeObliquity[i]
+                +
+                M * this.periodicTermsNutationLongitudeObliquity[i+1]
+                +
+                Mprime * this.periodicTermsNutationLongitudeObliquity[i+2]
+                +
+                F * this.periodicTermsNutationLongitudeObliquity[i+3]
+                +
+                omega * this.periodicTermsNutationLongitudeObliquity[i+4])
+                ); 
+    }
+    testNutationObliquity /= 10000.0;
+    //System.out.println("Calculs : test accurate delta epsilon (arc sec): " + testNutationObliquity);
+
 		//mean longitudes of the Sun and the Moon
+	  //page 144 (fin de la page) => précision = 0.5 seconde d'arc
 		this.sunMeanLongitude = 280.4665 + 36000.7698*this.T;
 		this.sunMeanLongitude = ((this.sunMeanLongitude%360.0)+360.0)%360.0;
 		//System.out.println("sunMeanLongitude = "+this.sunMeanLongitude);
 		
 		//nutation in longitude and obliquity (in arc seconds !)
-		this.nutationLongitude = (-17.20*Math.sin(Math.toRadians(this.astro.moon.moonLongitudeAscendignNode)))- (1.32*Math.sin(Math.toRadians(2*this.sunMeanLongitude))) - (0.23*Math.sin(Math.toRadians(2*this.astro.moon.moonMeanLongitude))) + (0.21*Math.sin(Math.toRadians(2*this.astro.moon.moonLongitudeAscendignNode)));
-		this.nutationObliquity = (9.20*Math.cos(Math.toRadians(this.astro.moon.moonLongitudeAscendignNode))) + (0.57*Math.cos(Math.toRadians(2*this.sunMeanLongitude))) + (0.10*Math.cos(Math.toRadians(2*this.astro.moon.moonMeanLongitude))) - (0.09*Math.cos(Math.toRadians(2*this.astro.moon.moonLongitudeAscendignNode)));
+//		this.nutationLongitude = (-17.20*Math.sin(Math.toRadians(this.astro.moon.moonLongitudeAscendignNode))) - (1.32*Math.sin(2*Math.toRadians(this.sunMeanLongitude))) - (0.23*Math.sin(2*Math.toRadians(this.astro.moon.moonMeanLongitude))) + (0.21*Math.sin(2*Math.toRadians(this.astro.moon.moonLongitudeAscendignNode)));
+//		this.nutationObliquity = (9.20*Math.cos(Math.toRadians(this.astro.moon.moonLongitudeAscendignNode))) + (0.57*Math.cos(2*Math.toRadians(this.sunMeanLongitude))) + (0.10*Math.cos(2*Math.toRadians(this.astro.moon.moonMeanLongitude))) - (0.09*Math.cos(2*Math.toRadians(this.astro.moon.moonLongitudeAscendignNode)));
+    this.nutationLongitude = testNutationLongitude;
+    this.nutationObliquity = testNutationObliquity;
 		//System.out.println("nutationLongitude = "+this.nutationLongitude);
 		//System.out.println("nutationObliquity = "+this.nutationObliquity);
 		
@@ -472,15 +608,16 @@ public double calculateSun() {
 		
 		//The mean obliquity of the ecliptic is given by the following formula, adopted
 		//by the International Astronomical Union [1]
+		//page 147
 		this.eclipticMeanObliquity=23.0+(26.0/60.0);
 		this.periodicTerms=new double[]{21.448, -46.8150, -0.00059, 0.001813};
 		this.eclipticMeanObliquity += this.calculatePolynomial(this.T, this.periodicTerms, 0)/3600.0;
-		//System.out.println("eclipticMeanObliquity = "+this.eclipticMeanObliquity);
+		//System.out.println("eclipticMeanObliquity = "+ this.angleDecimalToDMSdecimals(this.eclipticMeanObliquity));
 		
 		//The true obliquity of the ecliptic is e = e0 + deltae, where deltae is the nutation in
 		//obliquity
 		this.eclipticTrueObliquity=this.eclipticMeanObliquity+(this.nutationObliquity/3600.0);
-		//System.out.println("eclipticTrueObliquity = "+this.eclipticTrueObliquity);
+		//System.out.println("eclipticTrueObliquity = "+ this.angleDecimalToDMSdecimals(this.eclipticTrueObliquity));
 		
 		return 0.0;
 	}
@@ -702,22 +839,39 @@ public double calculateSun() {
 	}
 	
 	public String angleDecimalToDMS(double angle) {
-		int d, m;
-		double temp, s;
+		int d, m, s;
+		double temp;
 		
 		temp=Math.abs(angle);
 		d=(int)Math.floor(temp);
 		temp=(temp-d)*60.0;
 		m=(int)Math.floor(temp);
 		temp=(temp-m)*60.0;
-		s=temp;
+		s=(int)temp;
 		
 		if(angle>=0)
-			return new String(d+"° "+m+" ' "+(int)s+" ''");
+			return new String(d+"° "+m+" ' "+s+" ''");
 		else
-			return new String("-"+d+"° "+m+" ' "+(int)s+" ''");
+			return new String("-"+d+"° "+m+" ' "+s+" ''");
 	}
 	
+  public String angleDecimalToDMSdecimals(double angle) {
+    int d, m;
+    double temp, s;
+    
+    temp=Math.abs(angle);
+    d=(int)Math.floor(temp);
+    temp=(temp-d)*60.0;
+    m=(int)Math.floor(temp);
+    temp=(temp-m)*60.0;
+    s=temp;
+    
+    if(angle>=0)
+      return new String(d+"° "+m+" ' "+s+" ''");
+    else
+      return new String("-"+d+"° "+m+" ' "+s+" ''");
+  }
+  
 	public String angleDecimalToHMS(double angle) {
 		int d, m, s;
 		double temp;
@@ -734,6 +888,24 @@ public double calculateSun() {
 		else
 			return new String("-"+d+" h "+m+" m "+s+" s");
 	}
+
+  public String angleDecimalToHMSdecimals(double angle) {
+    int d, m;
+    double s;
+    double temp;
+    
+    temp=Math.abs(angle);
+    d=(int)Math.floor(temp);
+    temp=(temp-d)*60.0;
+    m=(int)Math.floor(temp);
+    temp=(temp-m)*60.0;
+    s=temp;
+    
+    if(angle>=0)
+      return new String(d+" h "+m+" m "+s+" s ");
+    else
+      return new String("-"+d+" h "+m+" m "+s+" s");
+  }
 
 	public double getGeocentricXCoordinate(double lambda, double beta, double radius) {
 		return (radius
