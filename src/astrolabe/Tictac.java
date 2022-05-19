@@ -127,20 +127,20 @@ public class Tictac extends TimerTask {
 		else heureEte=new String("hiver");
 		 */
 	
-		astro.setTitle("Astrolabe - Date = "+this.astro.calc.ldt.toLocalDate().toString()
+    this.astro.calc.calculateJulianDay();
+    this.astro.calc.calculDeltaT();
+    this.astro.calc.calculateAll();
+
+    astro.setTitle("Astrolabe - Date = "+this.astro.calc.ldt.toLocalDate().toString()
 						+" - H. locale ("+heureEte+") = "+String.format("%tT", this.astro.calc.ldt.toLocalTime())
 						+" ("+ZoneId.systemDefault().toString()+")"
-						+" - UT = " + String.format("%tT", astro.calc.ut)
-						+" - H. sidérale = " + String.format("%tT", astro.calc.st)
-						+" - H. solaire = "+String.format("%tT", astro.calc.hsl)
-						+" - Jour julien = " + String.format("%1.10f", astro.calc.jd)
-						+" - EdT = "+ astro.calc.angleDecimalToHMS(astro.calc.eot/15.0)
+						+" - UT = " + String.format("%tT", this.astro.calc.ut)
+						+" - H. sidérale = " + String.format("%tT", this.astro.calc.st)
+						+" - H. solaire = "+String.format("%tT", this.astro.calc.hsl)
+						+" - Jour julien = " + String.format("%1.10f", this.astro.calc.jd)
+						+" - EdT = "+ this.astro.calc.angleDecimalToHMS(this.astro.calc.eot/15.0)
 						);
 		
-		astro.calc.calculateJulianDay();
-		this.astro.calc.calculDeltaT();
-		this.astro.calc.calculateAll();
-
 		astro.repaint();
 
 		//Compte à rebours pour Soleil au méridien local

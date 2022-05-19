@@ -167,8 +167,8 @@ public class Calculs {
 		double t;
 		
 		//Calcul deltaT
-		//pour ann�es entre 1600 et 2000 : voir Astronomical Algorithms (table 10.A, p.79)
-		//TODO pas trouv� de formule pour la p�riode 1600->1800, 1998 et 1999 => tr�s grosse erreur !
+		//pour années entre 1600 et 2000 : voir Astronomical Algorithms (table 10.A, p.79)
+		//TODO pas trouvé de formule pour la période 1600->1800, 1998 et 1999 => tr�s grosse erreur !
 		//y=ldt.getYear();
 		y=ut.getYear();
 		t=(y-2000.0)/100.0;
@@ -212,7 +212,7 @@ public class Calculs {
 			this.deltaT += 0.37 * (y-2100);
 		}
 		
-		//System.out.println("deltaT = "+(int)this.deltaT);;
+		//System.out.println("deltaT = "+(int)this.deltaT);
 		
 		return this.deltaT;
 	}
@@ -269,10 +269,12 @@ public double calculateSun() {
 		//The mean obliquity of the ecliptic is given by the following formula, adopted
 		//by the International Astronomical Union [1]:
 		//eo = 23�26'21".448 - 46".8150*T - 0".00059*T^� + 0".001813*T^�
-		this.eclipticMeanObliquity=(23+(26/60.0)+(21.448/3600.0))
-									-((46.8150/3600.0)*this.T)
-									-((0.00059/3600.0)*this.T*this.T)
-									+((0.001813/3600.0)*this.T*this.T*this.T);
+
+//déjà calculé dans calculEcliptic !
+//		this.eclipticMeanObliquity=(23+(26/60.0)+(21.448/3600.0))
+//									-((46.8150/3600.0)*this.T)
+//									-((0.00059/3600.0)*this.T*this.T)
+//									+((0.001813/3600.0)*this.T*this.T*this.T);
 		//System.out.println("Mean obliquity of ecliptic = "+this.eclipticMeanObliquity);
 		
 		//Sun's right ascension ex and declination 0 can be calculated from the following
@@ -383,8 +385,9 @@ public double calculateSun() {
 	public void calculateLocalSiderealTime(double jd) {
 		double theta0, hs, ms, ss;
 		
-		this.T=(this.jd-2451545.0)/36525.0;
-		
+		//this.T=(this.jd-2451545.0)/36525.0;
+		this.T=(this.jde-2451545.0)/36525.0;
+    
 		//System.out.println("T="+T);
 		theta0=(280.46061837 + (360.98564736629 * (this.jd - 2451545.0))+ (0.000387933*T*T) - (T*T*T/38710000))%360;
 		//System.out.println("theta0="+theta0);
@@ -600,8 +603,8 @@ public double calculateSun() {
 //		this.nutationObliquity = (9.20*Math.cos(Math.toRadians(this.astro.moon.moonLongitudeAscendignNode))) + (0.57*Math.cos(2*Math.toRadians(this.sunMeanLongitude))) + (0.10*Math.cos(2*Math.toRadians(this.astro.moon.moonMeanLongitude))) - (0.09*Math.cos(2*Math.toRadians(this.astro.moon.moonLongitudeAscendignNode)));
     this.nutationLongitude = testNutationLongitude;
     this.nutationObliquity = testNutationObliquity;
-		//System.out.println("nutationLongitude = "+this.nutationLongitude);
-		//System.out.println("nutationObliquity = "+this.nutationObliquity);
+//		System.out.println("nutationLongitude = "+this.nutationLongitude);
+//		System.out.println("nutationObliquity = "+this.nutationObliquity);
 		
 		
 		//Obliquity
