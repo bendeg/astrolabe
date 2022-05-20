@@ -718,10 +718,10 @@ public double calculateSun() {
 //      System.out.println("Calculs - rayon cône d'ombre au niveau de la Lune : " + this.rayonOmbre);
       this.angleApparentOmbre = Math.toDegrees(Math.atan(this.rayonOmbre / this.astro.moon.earthMoonDistance));
 //      System.out.println("Calculs - angle apparent de l'ombre au niveau de la Lune : " + this.angleApparentOmbre);
-      this.angleApparentSoleil = Math.toDegrees(Math.atan(this.rayonSoleil/(this.astro.planetes[3].helioRadius*this.uniteAstronomique)));
-//      System.out.println("Calculs - angle apparent du rayon du Soleil : " + this.angleApparentSoleil);
+      this.angleApparentSoleil = Math.toDegrees(Math.atan(this.rayonSoleil/(this.astro.planetes[2].helioRadius*this.uniteAstronomique)));
+//      System.out.println("Calculs - angle apparent du Soleil : "+ this.angleDecimalToDMS(this.angleApparentSoleil * 2));
       this.angleApparentLune = Math.toDegrees(Math.atan(this.rayonLune/this.astro.moon.earthMoonDistance));
-//      System.out.println("Calculs - angle apparent du rayon de la Lune : " + this.angleApparentLune);
+//      System.out.println("Calculs - angle apparent de la Lune : " + this.angleDecimalToDMS(this.angleApparentLune * 2) );
 	}
 	
 	/*
