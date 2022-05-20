@@ -97,7 +97,14 @@ public class Calculs {
 	     0,  0,  3,  2,  2,      -3,      0,      0,    0,
 	     2, -1,  0,  2,  2,      -3,      0,      0,    0
 	};
-	double jd, fuseau, jde, td, mjd, jd0, localSiderealTime, utSiderealtime, T, H, deltaT;
+	double jd, fuseau, jde, td, mjd, jd0,
+	        localSiderealTime, utSiderealtime, T, H, deltaT,
+          uniteAstronomique = 149597870.700,//en Km
+          rayonSoleil= 696342.0, rayonTerre = 6371.0, rayonLune = 1737.4,//en Km
+          angleApparentSoleil, angleApparentLune,
+          angleOmbreTerre, angleApparentOmbre,
+          anglePenombreTerre, angleApparentPenombre,
+          rayonOmbre;
 	double[] periodicTerms;
 	boolean dst;
 
@@ -174,6 +181,16 @@ public class Calculs {
 		t=(y-2000.0)/100.0;
 		//System.out.println("Calcul deltaT : y="+y+" t="+t);
 		
+    if(y<948){
+      periodicTerms=new double[]{2177.0, 497.0, 44.1};
+      this.deltaT=this.calculatePolynomial(t, periodicTerms, 0);
+    }
+    
+    if(((y>=948) && (y<=1600)) || (y>=2000)){
+      periodicTerms=new double[]{102.0, 102.0, 25.3};
+      this.deltaT = this.calculatePolynomial(t, periodicTerms,0);
+    }
+    
 		if((y>=1800) && (y<=1997)) {
 			periodicTerms=new double[]{-1.02, 91.02, 265.90, -839.16, -1545.20
 			, 3603.62, 4385.98, -6993.23, -6090.04, 6298.12, 4102.86, -2137.64
@@ -181,16 +198,6 @@ public class Calculs {
 			this.deltaT = this.calculatePolynomial(t, periodicTerms,0);
 		}
 
-		if(y<948){
-			periodicTerms=new double[]{2177.0, 497.0, 44.1};
-			this.deltaT=this.calculatePolynomial(t, periodicTerms, 0);
-		}
-		
-		if(((y>=948) && (y<=1600)) || (y>=2000)){
-			periodicTerms=new double[]{102.0, 102.0, 25.3};
-			this.deltaT = this.calculatePolynomial(t, periodicTerms,0);
-		}
-		
 		if((y>=1800) && (y<=1997)){
 			
 			t=(y-1900.0)/100.0;
@@ -208,6 +215,7 @@ public class Calculs {
 				this.deltaT = this.calculatePolynomial(t, periodicTerms,0);
 			}
 		}
+		
 		if(y>=2000 && y<=2100){
 			this.deltaT += 0.37 * (y-2100);
 		}
@@ -385,8 +393,15 @@ public double calculateSun() {
 	public void calculateLocalSiderealTime(double jd) {
 		double theta0, hs, ms, ss;
 		
-		//this.T=(this.jd-2451545.0)/36525.0;
-		this.T=(this.jde-2451545.0)/36525.0;
+		
+		
+//		if(this.jde != this.jd + this.deltaT) {
+//		  System.out.println("Calculs - problème - jd = " + this.jd + " - deltaT = " + this.deltaT + " - jde = " + this.jde);
+//      System.out.println("Calculs - problème - jde-jd= " + (this.jde - this.jd));
+//		}
+		this.T=(jd-2451545.0)/36525.0;
+		//this.T=(jde-2451545.0)/36525.0;//normalement, c'est la bonne équation => problème avec this.jd et/ou this.deltaT ???
+    //System.out.println("Calculs - T : " + this.T);
     
 		//System.out.println("T="+T);
 		theta0=(280.46061837 + (360.98564736629 * (this.jd - 2451545.0))+ (0.000387933*T*T) - (T*T*T/38710000))%360;
@@ -517,9 +532,7 @@ public double calculateSun() {
 		//"Nutation and the Obliquity of the Ecliptic"
 		this.jde=this.jd+(this.deltaT/24.0/3600.0);
 		//System.out.println("JD = "+this.jd+" JDE="+this.jde);
-		
-		calculateLocalSiderealTime(this.jd);
-}
+	}
 	
 	public double calculateEcliptic() {
 		double testNutationLongitude, D, M, Mprime, F, omega,
@@ -665,8 +678,12 @@ public double calculateSun() {
 	}
 	
 	public void calculateAll() {
-		double deltaYears;
+		double deltaYears = 1.0;
 		
+    this.calculateJulianDay();
+    this.calculateLocalSiderealTime(this.jd);
+    this.calculDeltaT();
+    
 		this.calculateRhoSinLatRhoCosLat();
 		
 		//if(this.currentYear != this.astro.calc.ldt.getYear()) {
@@ -693,7 +710,18 @@ public double calculateSun() {
 			this.calculateSun();
 			this.calculateEcliptic();
 			this.astro.moon.calculateMoon();
-			this.calculatePlanets();
+      this.calculatePlanets();
+
+			this.angleOmbreTerre = Math.toDegrees(Math.atan( (this.rayonSoleil - this.rayonTerre) / (this.uniteAstronomique * this.astro.planetes[3].helioRadius)));
+//			System.out.println("Calculs - angle cône d'ombre de la Terre : " + this.angleOmbreTerre);
+			this.rayonOmbre = this.rayonTerre - (this.astro.moon.earthMoonDistance * Math.tan(Math.toRadians(this.angleOmbreTerre)));
+//      System.out.println("Calculs - rayon cône d'ombre au niveau de la Lune : " + this.rayonOmbre);
+      this.angleApparentOmbre = Math.toDegrees(Math.atan(this.rayonOmbre / this.astro.moon.earthMoonDistance));
+//      System.out.println("Calculs - angle apparent de l'ombre au niveau de la Lune : " + this.angleApparentOmbre);
+      this.angleApparentSoleil = Math.toDegrees(Math.atan(this.rayonSoleil/(this.astro.planetes[3].helioRadius*this.uniteAstronomique)));
+//      System.out.println("Calculs - angle apparent du rayon du Soleil : " + this.angleApparentSoleil);
+      this.angleApparentLune = Math.toDegrees(Math.atan(this.rayonLune/this.astro.moon.earthMoonDistance));
+//      System.out.println("Calculs - angle apparent du rayon de la Lune : " + this.angleApparentLune);
 	}
 	
 	/*

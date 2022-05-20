@@ -22,7 +22,8 @@ public class Affichage extends JPanel {
 	transient Graphics2D g2d;	
 	JCheckBox tsl, tympan, almuvert5, almuvert1, astre, noeudASC, noeudDESC, satGPS,
 	          checkMercure, checkVenus, checkMars, checkJupiter, checkSaturne, checkUranus, checkNeptune,
-	          checkFreeLocation, asterismes, checkSoleil, checkPAS, checkLune;
+	          checkFreeLocation, asterismes, checkSoleil, checkPAS, checkLune, checkLuneTopoCentric,
+	          checkModeEclipse;
 	JSlider magSlider;
 	JLabel magLabel=new JLabel("Magnitude"),
 	       astreAD=new JLabel("    Ascension droite (HMS)"),
@@ -357,6 +358,22 @@ public class Affichage extends JPanel {
     this.gbc.gridy=21;
     this.gb.setConstraints(this.checkLune, this.gbc);
     this.add(checkLune);
+
+    checkLuneTopoCentric=new JCheckBox("Correction topocentrique", false);
+    checkLuneTopoCentric.setBackground(Color.BLACK);
+    checkLuneTopoCentric.setForeground(Color.GRAY);
+    this.gbc.gridx=1;
+    this.gbc.gridy=21;
+    this.gb.setConstraints(this.checkLuneTopoCentric, this.gbc);
+    this.add(checkLuneTopoCentric);
+	
+    checkModeEclipse=new JCheckBox("Lune/Soleil à l'échelle + ombre de la Terre) ", false);
+    checkModeEclipse.setBackground(Color.BLACK);
+    checkModeEclipse.setForeground(Color.RED);
+    this.gbc.gridx=0;
+    this.gbc.gridy=22;
+    this.gb.setConstraints(this.checkModeEclipse, this.gbc);
+    this.add(checkModeEclipse);
 	}
 
 	public void paintComponent(Graphics g){

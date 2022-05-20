@@ -13,7 +13,8 @@ import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
-//import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Dimension2D;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -87,7 +88,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		//System.out.println(this.currentFont.getSize2D());
 		
 		//System.out.println(g2d.getBackground());
-		Point2D temp=new Point(0,0);
+		Point2D temp=new Point(0,0), tempOmbre = new Point(0, 0);
 		Ellipse2D ell;
 		this.astro.tPlanetes.populate();
 		
@@ -132,7 +133,6 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     }
     else {
       this.astro.face.hemiCoefDec=-1.0;
-      //this.astro.face.hemiCoefRA=180.0;
       this.astro.face.hemiCoefRA=180.0;
     }
 		
@@ -362,18 +362,23 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.calc.sunDeclination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+this.hemiCoefRA)),
   		                 this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.calc.sunDeclination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+this.hemiCoefRA)));
   		g2d.setColor(Color.YELLOW);
-  		//essai taille du Soleil (zoom et �clipses...)
-  		//double sizeX=this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-(this.astro.calc.sunDeclination+this.astro.calc.sunSize/2)/2))*Math.cos(Math.toRadians(this.astro.calc.sunRightAscension+this.astro.calc.sunSize/2));
-  		//double sizeY=this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-(this.astro.calc.sunDeclination+this.astro.calc.sunSize/2)/2))*Math.sin(Math.toRadians(this.astro.calc.sunRightAscension+this.astro.calc.sunSize/2));
-  		//double deltaX, deltaY;
-  		//deltaX=temp.x-sizeX;
-  		//deltaY=temp.y-sizeY;
-  		//g2d.fillOval(temp.x-(int)(deltaX/2.0), temp.y-(int)(deltaY/2.0), (int)deltaX , (int)deltaY);
-  		ell=new Ellipse2D.Double(temp.getX()-7, temp.getY()-7, 14, 14);
+      g2d.setStroke(normal);
+      if(this.astro.affichage.checkModeEclipse.isSelected()) {
+        tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.calc.sunDeclination + this.astro.calc.angleApparentSoleil)/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+this.hemiCoefRA)),
+            this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.calc.sunDeclination + this.astro.calc.angleApparentSoleil)/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+this.hemiCoefRA)));
+        tempDouble = Math.sqrt( 
+            (temp.getX()-tempOmbre.getX()) * (temp.getX()-tempOmbre.getX())
+            +
+            (temp.getY()-tempOmbre.getY()) * (temp.getY()-tempOmbre.getY())
+            );
+        ell = new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY()- tempDouble, 2 * tempDouble, 2 * tempDouble);
+      }
+      else {
+        ell = new Ellipse2D.Double(temp.getX()-7, temp.getY()-7, 14, 14);
+      }
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
-  		g2d.setStroke(normal);
   		g2d.draw(new Line2D.Double(this.centreX, this.centreY, temp.getX(), temp.getY()));
     }
     
@@ -383,16 +388,43 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
       g2d.setStroke(dashed);
       g2d.setColor(Color.YELLOW);
       g2d.draw(new Line2D.Double(this.centreX, this.centreY, temp.getX(), temp.getY()));
+      
+      if(this.astro.affichage.checkModeEclipse.isSelected()) {
+        g2d.setColor(Color.GRAY);
+        g2d.setStroke(dotted);
+        tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(-this.astro.calc.sunDeclination - this.astro.calc.angleApparentOmbre)/2  ))*Math.cos(Math.toRadians(this.hemiCoefDec*(this.astro.calc.sunRightAscension+this.astro.calc.angleApparentOmbre+180.0)+this.hemiCoefRA)),
+            this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(-this.astro.calc.sunDeclination - this.astro.calc.angleApparentOmbre)/2  ))*Math.sin(Math.toRadians(this.hemiCoefDec*(this.astro.calc.sunRightAscension+this.astro.calc.angleApparentOmbre+180.0)+this.hemiCoefRA)));
+        tempDouble = Math.sqrt( 
+            (temp.getX()-tempOmbre.getX()) * (temp.getX()-tempOmbre.getX())
+            +
+            (temp.getY()-tempOmbre.getY()) * (temp.getY()-tempOmbre.getY())
+            );
+        ell = new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY()- tempDouble, 2 * tempDouble, 2 * tempDouble);
+        g2d.draw(ell);
+      }
     }
+    
     //dessin de la Lune
 		if(this.astro.affichage.checkLune.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.moon.moonDeclination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.moon.moonDeclination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+this.hemiCoefRA)));
+      tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.moon.moonDeclination + this.astro.calc.angleApparentLune)/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+0.25+this.hemiCoefRA)),
+                            this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.moon.moonDeclination + this.astro.calc.angleApparentLune)/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+0.25+this.hemiCoefRA)));
   		g2d.setColor(Color.GRAY);
-  		ell=new Ellipse2D.Double(temp.getX()-7, temp.getY()-7, 14, 14);
+      g2d.setStroke(normal);
+      if(this.astro.affichage.checkModeEclipse.isSelected() ) {
+      tempDouble = Math.sqrt( 
+          (temp.getX()-tempOmbre.getX()) * (temp.getX()-tempOmbre.getX())
+          +
+          (temp.getY()-tempOmbre.getY()) * (temp.getY()-tempOmbre.getY())
+          );
+      ell = new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY()- tempDouble, 2 * tempDouble, 2 * tempDouble);
+      }
+      else {
+        ell = new Ellipse2D.Double(temp.getX()-7, temp.getY()-7, 14, 14);
+      }
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
-  		g2d.setStroke(normal);
   		g2d.draw(new Line2D.Double(this.centreX, this.centreY, temp.getX(), temp.getY()));
 		}
     //dessin noeud ascendant de la Lune

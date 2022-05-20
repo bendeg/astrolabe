@@ -127,8 +127,6 @@ public class Tictac extends TimerTask {
 		else heureEte=new String("hiver");
 		 */
 	
-    this.astro.calc.calculateJulianDay();
-    this.astro.calc.calculDeltaT();
     this.astro.calc.calculateAll();
 
     astro.setTitle("Astrolabe - Date = "+this.astro.calc.ldt.toLocalDate().toString()

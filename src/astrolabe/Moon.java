@@ -361,7 +361,9 @@ public class Moon {
 		//System.out.println("Moon declination = "+this.moonDeclination+" dms = "+this.angleDecimalToDMS(this.moonDeclination));
 		
 		//Correction due à la parallaxe => position apparente change selon la postiion sur Terre
-		this.calculateTopocentricEquatorial();
+		if(this.astro.affichage.checkLuneTopoCentric.isSelected()) {
+		  this.calculateTopocentricEquatorial();
+		}
 		
 		this.moonHauteur=this.astro.calc.calculateHauteurHorizontalFromEquatorial(this.moonRA, this.moonDeclination);
 		
