@@ -364,8 +364,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
   		g2d.setColor(Color.YELLOW);
       g2d.setStroke(normal);
       if(this.astro.affichage.checkModeEclipse.isSelected()) {
-        tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.calc.sunDeclination + this.astro.calc.angleApparentSoleil)/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+this.hemiCoefRA)),
-            this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.calc.sunDeclination + this.astro.calc.angleApparentSoleil)/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+this.hemiCoefRA)));
+        tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.calc.sunDeclination + this.astro.calc.angleApparentSoleil)/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+ this.astro.calc.angleApparentSoleil+this.hemiCoefRA)),
+            this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.calc.sunDeclination + this.astro.calc.angleApparentSoleil)/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+ this.astro.calc.angleApparentSoleil+this.hemiCoefRA)));
         tempDouble = Math.sqrt( 
             (temp.getX()-tempOmbre.getX()) * (temp.getX()-tempOmbre.getX())
             +
@@ -407,8 +407,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     //dessin de la Lune
 		if(this.astro.affichage.checkLune.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.moon.moonDeclination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.moon.moonDeclination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+this.hemiCoefRA)));
-      tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.moon.moonDeclination + this.astro.calc.angleApparentLune)/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+0.25+this.hemiCoefRA)),
-                            this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.moon.moonDeclination + this.astro.calc.angleApparentLune)/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+0.25+this.hemiCoefRA)));
+      tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.moon.moonDeclination + this.astro.calc.angleApparentLune)/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+this.astro.calc.angleApparentLune+this.hemiCoefRA)),
+                            this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.moon.moonDeclination + this.astro.calc.angleApparentLune)/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.moon.moonRA+this.astro.calc.angleApparentLune+this.hemiCoefRA)));
   		g2d.setColor(Color.GRAY);
       g2d.setStroke(normal);
       if(this.astro.affichage.checkModeEclipse.isSelected() ) {
