@@ -32,8 +32,8 @@ public class Parametres extends JPanel {
 	JLabel[] labels;
 	JButton save=new JButton("Sauvegarder la configuration");
 	JToggleButton pleinEcran;
-	ParametreTextField textFieldLatitude, textFieldLongitude, textFieldCutoff;
-	String[] paramName = {"Sauvegarde", "Latitude", "Longitude", "Cutoff", "Plein écran"};
+	ParametreTextField textFieldLatitude, textFieldLongitude, textFieldAltitude, textFieldCutoff;
+	String[] paramName = {"Sauvegarde", "Latitude", "Longitude", "Altitude", "Cutoff", "Plein écran"};
 	
 	public Parametres (Astrolabe a){
 		this.astro = a;
@@ -46,6 +46,7 @@ public class Parametres extends JPanel {
 		//this.textFieldLatitude.setText(String.valueOf(astro.latitude));
 		this.textFieldLongitude=new ParametreTextField(this.astro, "Longitude");
 		//this.textFieldLongitude.setText(String.valueOf(astro.longitude));
+    this.textFieldAltitude=new ParametreTextField(this.astro, "Altitude");
 		this.textFieldCutoff=new ParametreTextField(this.astro, "Cutoff");
 		
 		this.save.setBackground(Color.BLACK);
@@ -96,6 +97,9 @@ public class Parametres extends JPanel {
 					break;
 				case "Longitude" :
 					this.add(this.textFieldLongitude);
+					break;
+				case "Altitude" :
+          this.add(this.textFieldAltitude);				  
 					break;
 				case "Sauvegarde" :
 					this.add(this.save);

@@ -535,8 +535,8 @@ public double calculateSun() {
 	}
 	
 	public double calculateEcliptic() {
-		double testNutationLongitude, D, M, Mprime, F, omega,
-		        testNutationObliquity;
+		double accurateNutationLongitude, D, M, Mprime, F, omega,
+		        accurateNutationObliquity;
 		
 		//System.out.println("Calculs - T : " + this.T);
 		//Nutation
@@ -563,11 +563,11 @@ public double calculateSun() {
     if(omega < 0.0) omega += 360.0;
     //System.out.println("Calculs - omega : " + omega);
 		
-		testNutationLongitude = 0.0;
+		accurateNutationLongitude = 0.0;
 		//System.out.println("Calculs test long/double : " + (-1.7 * 2) + "/" + (-1.7 * 2.0));
 		//erreur de l'ordre d'un dixième de seconde d'arc (tableau foireux ? vérifié et corrigé une erreur, pas mieux...)
 		for(int i = 0; i < this.periodicTermsNutationLongitudeObliquity.length / 9; i+=9) {
-		  testNutationLongitude +=  
+		  accurateNutationLongitude +=  
   		      (this.periodicTermsNutationLongitudeObliquity[i+5] + this.periodicTermsNutationLongitudeObliquity[i+6] * this.T)
   		      * 
   		      Math.sin(Math.toRadians(
@@ -582,12 +582,12 @@ public double calculateSun() {
                 omega * this.periodicTermsNutationLongitudeObliquity[i+4])
   		          ); 
 		}
-		testNutationLongitude /= 10000.0;
+		accurateNutationLongitude /= 10000.0;
 		//System.out.println("Calculs : test accurate delta psy (arc sec): " + testNutationLongitude);
 
-    testNutationObliquity = 0.0;
+    accurateNutationObliquity = 0.0;
     for(int i = 0; i < this.periodicTermsNutationLongitudeObliquity.length / 9; i+=9) {
-      testNutationObliquity +=  
+      accurateNutationObliquity +=  
             (this.periodicTermsNutationLongitudeObliquity[i+7] + this.periodicTermsNutationLongitudeObliquity[i+8] * this.T)
             * 
             Math.cos(Math.toRadians(
@@ -602,7 +602,7 @@ public double calculateSun() {
                 omega * this.periodicTermsNutationLongitudeObliquity[i+4])
                 ); 
     }
-    testNutationObliquity /= 10000.0;
+    accurateNutationObliquity /= 10000.0;
     //System.out.println("Calculs : test accurate delta epsilon (arc sec): " + testNutationObliquity);
 
 		//mean longitudes of the Sun and the Moon
@@ -614,8 +614,8 @@ public double calculateSun() {
 		//nutation in longitude and obliquity (in arc seconds !)
 //		this.nutationLongitude = (-17.20*Math.sin(Math.toRadians(this.astro.moon.moonLongitudeAscendignNode))) - (1.32*Math.sin(2*Math.toRadians(this.sunMeanLongitude))) - (0.23*Math.sin(2*Math.toRadians(this.astro.moon.moonMeanLongitude))) + (0.21*Math.sin(2*Math.toRadians(this.astro.moon.moonLongitudeAscendignNode)));
 //		this.nutationObliquity = (9.20*Math.cos(Math.toRadians(this.astro.moon.moonLongitudeAscendignNode))) + (0.57*Math.cos(2*Math.toRadians(this.sunMeanLongitude))) + (0.10*Math.cos(2*Math.toRadians(this.astro.moon.moonMeanLongitude))) - (0.09*Math.cos(2*Math.toRadians(this.astro.moon.moonLongitudeAscendignNode)));
-    this.nutationLongitude = testNutationLongitude;
-    this.nutationObliquity = testNutationObliquity;
+    this.nutationLongitude = accurateNutationLongitude;
+    this.nutationObliquity = accurateNutationObliquity;
 //		System.out.println("nutationLongitude = "+this.nutationLongitude);
 //		System.out.println("nutationObliquity = "+this.nutationObliquity);
 		
@@ -763,13 +763,13 @@ public double calculateSun() {
 	        e = Math.sqrt(2 * f - f * f), u;
 	  
 	  if (this.astro.coordGeo.getAltitude() == 0.0) {
-	    this.rhoSinLat = b * b * Math.sin(this.astro.coordGeo.getLatitude()*Math.PI/180.0);
-	    this.rhoCosLat = a * a * Math.cos(this.astro.coordGeo.getLatitude()*Math.PI/180.0);
+	    this.rhoSinLat = b * b * Math.sin(Math.toRadians(this.astro.coordGeo.getLatitude()));
+	    this.rhoCosLat = a * a * Math.cos(Math.toRadians(this.astro.coordGeo.getLatitude()));
 	  }
 	  else {
-	    u = Math.atan2(b * Math.tan(this.astro.coordGeo.getLatitude()*Math.PI/180.0), a);
-	    this.rhoSinLat = (b / a) * Math.sin(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.sin(this.astro.coordGeo.getLatitude()*Math.PI/180.0));
-	    this.rhoCosLat = Math.cos(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.cos(this.astro.coordGeo.getLatitude()*Math.PI/180.0));
+	    u = Math.atan2(b * Math.tan(Math.toRadians(this.astro.coordGeo.getLatitude())), a);
+	    this.rhoSinLat = (b / a) * Math.sin(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.sin(Math.toRadians(this.astro.coordGeo.getLatitude())));
+	    this.rhoCosLat = Math.cos(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.cos(Math.toRadians(this.astro.coordGeo.getLatitude())));
 	  }
 	  
 	  //System.out.println("Calculs = rhoSinLat et rhosCosLat :" + this.rhoSinLat + ", " + this.rhoCosLat);
@@ -827,9 +827,7 @@ public double calculateSun() {
     return t;
 	}
 	
-	public double precessionCorrectRA (double ra, double declination) {
-		double A, B;
-		
+	public double precessionCorrectRA (double ra, double declination) {		
 		this.precessionA = Math.cos(Math.toRadians(declination)) *
 				Math.sin(Math.toRadians(ra+(this.precessionZeta/3600.0)));
 		
@@ -847,9 +845,7 @@ public double calculateSun() {
     return Math.toDegrees(Math.atan2(this.precessionA, this.precessionB))+this.precessionZ/3600.0;
 	}
 	
-	public double precessionCorrectDeclination (double ra, double declination) {
-		double C;
-		
+	public double precessionCorrectDeclination (double ra, double declination) {		
 		this.precessionC=(Math.sin(Math.toRadians(this.precessionTheta/3600.0)) *
 			 Math.cos(Math.toRadians(declination)) *
 			 Math.cos(Math.toRadians(ra+(this.precessionZeta/3600.0)))

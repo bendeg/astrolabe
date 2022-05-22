@@ -27,7 +27,7 @@ import java.util.Vector;
 
 public class Astrolabe extends JFrame {
 static final long serialVersionUID=1;
-	Home home=new Home(0.001, 0.0);
+	Home home=new Home(0.001, 0.0, 0.0);
 	CoordonneeGeographique coordGeo;
 	double cutoffAngle=15.0;
 	Geodesy geodesy;
@@ -76,7 +76,7 @@ static final long serialVersionUID=1;
 		int i, j;
 		this.coordGeo=new CoordonneeGeographique();
 		this.coordGeo.setCoordonneeCartesienne(new Point3D(0.0, 0.0, 0.0));
-		this.coordGeo.setAltitude(60.0);
+		//this.coordGeo.setAltitude(60.0);
 		this.geodesy=new Geodesy();
 		this.gps=new Gps(this);
 		
@@ -120,7 +120,7 @@ static final long serialVersionUID=1;
     }
     System.out.println(file.getAbsolutePath() + " : " + i + " lignes");
     this.stars = new Astre[i];
-    System.out.println("Astrolabe - asterismes taille = " + j);
+    //System.out.println("Astrolabe - nombre d'asterismes : " + j);
     this.asterismes = new String[j][];
     
     //réouverture des trois scanners
@@ -192,7 +192,7 @@ static final long serialVersionUID=1;
 //                                      (b+1.46f)/(9+1.46f)
 //                                     ));
       //System.out.println("Astrolabe - color de " + i + " : " + this.stars[i].getRvb());
-      if(i==162) System.out.println("Astrolabe - Files - " + i + " " + this.stars[i].getId() + " " + this.stars[i].getDec());
+      //if(i==162) System.out.println("Astrolabe - Files - " + i + " " + this.stars[i].getId() + " " + this.stars[i].getDec());
       i++;
     }
     //System.out.println("Astrolabe - stars taille : " + this.stars.length);
@@ -232,9 +232,14 @@ static final long serialVersionUID=1;
 		this.param.deserialiser();
 		this.coordGeo.setLatitude(this.home.getLatitude());
 		this.param.textFieldLatitude.setText(String.valueOf(this.coordGeo.getLatitude()));
+		
 		this.coordGeo.setLongitude(this.home.getLongitude());
 		this.param.textFieldLongitude.setText(String.valueOf(this.coordGeo.getLongitude()));
-		this.cutoffAngle=this.home.cutoff;
+    
+		this.coordGeo.setAltitude(this.home.getAltitude());
+    this.param.textFieldAltitude.setText(String.valueOf(this.coordGeo.getAltitude()));
+		
+    this.cutoffAngle=this.home.cutoff;
 		this.param.textFieldCutoff.setText(String.valueOf(this.cutoffAngle));
 		
 		//v�rification coordonn�es cart�siennes de l'observateur
@@ -245,9 +250,9 @@ static final long serialVersionUID=1;
 				   this.coordGeo
 				   );
 		
-		System.out.println("X Obs ="+this.coordGeo.getCoordonneeCartesienne().getX());
-		System.out.println("Y Obs ="+this.coordGeo.getCoordonneeCartesienne().getY());
-		System.out.println("Z Obs ="+this.coordGeo.getCoordonneeCartesienne().getZ());
+		//System.out.println("X Obs ="+this.coordGeo.getCoordonneeCartesienne().getX());
+		//System.out.println("Y Obs ="+this.coordGeo.getCoordonneeCartesienne().getY());
+		//System.out.println("Z Obs ="+this.coordGeo.getCoordonneeCartesienne().getZ());
 		
 
 		affichage = new Affichage(this);

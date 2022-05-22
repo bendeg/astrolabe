@@ -80,8 +80,8 @@ static double ground_stations[]={
     	//URL url = new URL("https://navcen.uscg.gov/?pageName=currentAlmanac&format=yuma");
 		  URL url = new URL("https://celestrak.com/GPS/almanac/Yuma/almanac.yuma.txt");
 	        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-	        System.out.println("httpConn code réponse : " + httpConn.getResponseCode());
-	        System.out.println("GPS - httpConn - content type : " + httpConn.getContentType());
+	        //System.out.println("httpConn code réponse : " + httpConn.getResponseCode());
+	        //System.out.println("GPS - httpConn - content type : " + httpConn.getContentType());
 	        
 	        if(httpConn.getResponseCode() == 200)
 	          if(httpConn.getContentType().compareTo("text/plain") == 0) 

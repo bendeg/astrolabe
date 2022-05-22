@@ -246,7 +246,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     if(this.astro.affichage.checkNeptune.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[7].declination/2))*Math.cos(this.hemiCoefDec*Math.toRadians(this.astro.planetes[7].ra+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[7].declination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.planetes[7].ra+this.hemiCoefRA)));
   		g2d.setColor(Color.CYAN);
-  		ell=new Ellipse2D.Double(temp.getX()-5, temp.getY()-5, 10, 10);
+      tempDouble = Math.sqrt(4*4+4*4);//rayon
+  		ell=new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY() - tempDouble, 2 * tempDouble, 2 * tempDouble);
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
@@ -256,7 +257,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     if(this.astro.affichage.checkUranus.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-(this.hemiCoefDec*this.astro.planetes[6].declination/2)))*Math.cos(this.hemiCoefDec*Math.toRadians(this.astro.planetes[6].ra+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[6].declination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.planetes[6].ra+this.hemiCoefRA)));
   		g2d.setColor(Color.GREEN);
-  		ell=new Ellipse2D.Double(temp.getX()-5, temp.getY()-5, 10, 10);
+      tempDouble = Math.sqrt(4*4+4*4);//rayon
+      ell=new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY() - tempDouble, 2 * tempDouble, 2 * tempDouble);
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
@@ -266,7 +268,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     if(this.astro.affichage.checkSaturne.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[5].declination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.planetes[5].ra+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[5].declination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.planetes[5].ra+this.hemiCoefRA)));
   		g2d.setColor(Color.ORANGE);
-  		ell=new Ellipse2D.Double(temp.getX()-5, temp.getY()-5, 10, 10);
+      tempDouble = Math.sqrt(4*4+4*4);//rayon
+      ell=new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY() - tempDouble, 2 * tempDouble, 2 * tempDouble);
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
@@ -276,7 +279,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     if(this.astro.affichage.checkJupiter.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[4].declination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.planetes[4].ra+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[4].declination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.planetes[4].ra+this.hemiCoefRA)));
   		g2d.setColor(Color.MAGENTA);
-  		ell=new Ellipse2D.Double(temp.getX()-5, temp.getY()-5, 10, 10);
+      tempDouble = Math.sqrt(4*4+4*4);//rayon
+      ell=new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY() - tempDouble, 2 * tempDouble, 2 * tempDouble);
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
@@ -286,7 +290,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     if(this.astro.affichage.checkMars.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[3].declination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.planetes[3].ra+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[3].declination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.planetes[3].ra+this.hemiCoefRA)));
   		g2d.setColor(Color.RED);
-  		ell=new Ellipse2D.Double(temp.getX()-5, temp.getY()-5, 10, 10);
+      tempDouble = Math.sqrt(4*4+4*4);//rayon
+      ell=new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY() - tempDouble, 2 * tempDouble, 2 * tempDouble);
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
@@ -297,19 +302,20 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 	  if(this.astro.affichage.checkVenus.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[1].declination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.planetes[1].ra+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[1].declination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.planetes[1].ra+this.hemiCoefRA)));
   		g2d.setColor(Color.WHITE);
-  		ell=new Ellipse2D.Double(temp.getX()-5, temp.getY()-5, 10, 10);
+      tempDouble = Math.sqrt(4*4+4*4);//rayon
+      ell=new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY() - tempDouble, 2 * tempDouble, 2 * tempDouble);
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);
 	  }
 	  
-		g2d.setStroke(normal);
 		//dessin de Mercure
 		//temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-astro.mercuryDeclination/2))*Math.cos(Math.toRadians(astro.mercuryRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-astro.mercuryDeclination/2))*Math.sin(Math.toRadians(astro.mercuryRA)));
   	if(this.astro.affichage.checkMercure.isSelected()) {
   		temp.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[0].declination/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.planetes[0].ra+this.hemiCoefRA)), this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*this.astro.planetes[0].declination/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.planetes[0].ra+this.hemiCoefRA)));
   		g2d.setColor(Color.DARK_GRAY);
-  		ell=new Ellipse2D.Double(temp.getX()-5, temp.getY()-5, 10, 10);
+      tempDouble = Math.sqrt(4*4+4*4);//rayon
+      ell=new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY() - tempDouble, 2 * tempDouble, 2 * tempDouble);
   		g2d.draw(ell);
   		g2d.fill(ell);
   		//g2d.fillOval(temp.x-5, temp.y-5, 10, 10);

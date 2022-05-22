@@ -35,11 +35,18 @@ public class ParametreTextField extends JTextField implements ActionListener {
 				
 			case "Longitude" : 
 				this.value=a.coordGeo.longitude;
-				this.setText(String.valueOf(this.value)); break;
+				this.setText(String.valueOf(this.value));
+				break;
 
-			case "Cutoff" : 
+      case "Altitude" : 
+        this.value=a.coordGeo.altitude;
+        this.setText(String.valueOf(this.value)); 
+        break;
+			
+      case "Cutoff" : 
 				this.value=a.cutoffAngle;
-				this.setText(String.valueOf(this.value)); break;
+				this.setText(String.valueOf(this.value));
+				break;
 
 			default : break;
 		}	
@@ -81,6 +88,17 @@ public class ParametreTextField extends JTextField implements ActionListener {
 					this.setText(String.valueOf(astro.coordGeo.longitude));
 
 				break;
+      case "Altitude" : 
+        if(Double.valueOf(getText()) >= 0.0) {
+          astro.coordGeo.altitude=Double.valueOf(getText());
+          this.astro.geodesy.GEODESY_ConvertGeodeticCurvilinearToEarthFixedCartesianCoordinates(0, this.astro.coordGeo);
+          astro.home.setAltitude(astro.coordGeo.altitude);
+          value=astro.coordGeo.altitude;
+        }
+        else
+          this.setText(String.valueOf(astro.coordGeo.altitude));
+
+        break;
 			case "Cutoff" : 
 				if((Double.valueOf(getText()) >= 0.0) && (Double.valueOf(getText())<=90.0)) {
 					astro.cutoffAngle=Double.valueOf(getText());
