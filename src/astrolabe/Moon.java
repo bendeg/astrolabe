@@ -349,6 +349,7 @@ public class Moon {
 		//System.out.println("Apparent Moon longitude = "+this.moonGeoLambda);
     
 		//The equatorial horizontal parallax (pi) of the Moon can then be obtained from
+		//page 337
 		this.moonEquatorialHorizontalParallax=Math.toDegrees(Math.asin(6378.14/this.earthMoonDistance));
 		//System.out.println("Lune, parallaxe équatoriale horizontale ="+this.astro.calc.angleDecimalToDMS(this.moonEquatorialHorizontalParallax));
 		

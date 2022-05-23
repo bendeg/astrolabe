@@ -1,5 +1,12 @@
 package astrolabe;
 
+//https://fr.wikipedia.org/wiki/Ann%C3%A9e_(astronomie)#Ann%C3%A9e_sid%C3%A9rale
+//Tropique  31 556 925  365,242190517   366,24257448
+//Julienne  31 557 600  365,250000000   366,25040620
+//Sidérale  31 558 149  365,256363051   366,25677777
+//Anomalistique   31 558 433  365,259635864   366,26006846
+//Draconitique  29 947 975  346,620075883   347,56945550
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -45,6 +52,11 @@ public class ModeAnimation extends JPanel {
 	public ModeAnimation(Astrolabe a) {
 	  this.periodesTerre.put("Jour Sidéral", "86164");
     this.periodesTerre.put("Jour officiel (24h)", "86400");
+    this.periodesTerre.put("Année sidérale", "31558149");
+    this.periodesTerre.put("Année tropique", "31556925");
+    this.periodesTerre.put("Année julienne",  "31557600");
+    this.periodesTerre.put("Année anomalistique", "31558433");
+    this.periodesTerre.put("Année draconitique", "29947975");
 	  
 	  this.periodesLune.put("Lune : Mois draconitique", "2351136");
 	  this.periodesLune.put("Lune : Mois tropique", "2360584");//normalement en moyenne : 2360584,7

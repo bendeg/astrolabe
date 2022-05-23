@@ -517,6 +517,7 @@ public double calculateSun() {
 		System.out.println("b = " + b);
 		System.out.println("jd = " + jd);
 */	
+		//System.out.println("Calculs - dayfrac : " + dayfrac);
 		//System.out.println("Julianb day = " + ((int)(365.25*(year+4716.0))+(int)(30.6001*(month+1.0))+dayfrac+b-1524.5));
 		this.jd=(int)(365.25*(year+4716))+(int)(30.6001*(month+1))+dayfrac+b-1524.5;
 		
