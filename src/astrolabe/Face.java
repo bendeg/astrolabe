@@ -517,7 +517,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		while(hauteur>=-18.0){
 			distance=astro.equateur*Math.cos(Math.toRadians(phi))/(Math.sin(Math.toRadians(phi))+Math.sin(Math.toRadians(hauteur)));
 			rayon=Math.abs(astro.equateur*Math.cos(Math.toRadians(hauteur))/(Math.sin(Math.toRadians(phi))+Math.sin(Math.toRadians(hauteur))));
-			System.out.println("Face - hauteur : " + hauteur + " -- distance : " + distance + " -- rayon : " + rayon);
+			//System.out.println("Face - hauteur : " + hauteur + " -- distance : " + distance + " -- rayon : " + rayon);
 			g2d.draw(new Ellipse2D.Double(this.centreX-rayon, this.centreY-distance-rayon, rayon*2.0, rayon*2.0));
 			hauteur-=6.0;
 		}
