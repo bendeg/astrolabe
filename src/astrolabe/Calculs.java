@@ -104,6 +104,7 @@ public class Calculs {
           angleApparentSoleil, angleApparentLune,
           angleOmbreTerre, angleApparentOmbre,
           anglePenombreTerre, angleApparentPenombre,
+          penombreDistanceIntermediaire, penombreAngleIntermediaire, rayonPenombre,
           rayonOmbre;
 	double[] periodicTerms;
 	boolean dst;
@@ -723,6 +724,14 @@ public double calculateSun() {
 //      System.out.println("Calculs - angle apparent du Soleil : "+ this.angleDecimalToDMS(this.angleApparentSoleil * 2));
       this.angleApparentLune = Math.toDegrees(Math.atan(this.rayonLune/this.astro.moon.earthMoonDistance));
 //      System.out.println("Calculs - angle apparent de la Lune : " + this.angleDecimalToDMS(this.angleApparentLune * 2) );
+      this.penombreDistanceIntermediaire = (this.rayonTerre * this.uniteAstronomique * this.astro.planetes[3].helioRadius) / (this.rayonTerre + this.rayonSoleil); 
+      System.out.println("Calculs - penombreDistanceIntermediaire : " + this.penombreDistanceIntermediaire );
+      this.penombreAngleIntermediaire = Math.toDegrees(Math.atan(this.rayonTerre / this.penombreDistanceIntermediaire));
+      System.out.println("Calculs - penombreAngleIntermediaire : " + this.penombreAngleIntermediaire );
+      this.rayonPenombre = (this.penombreDistanceIntermediaire + this.astro.moon.earthMoonDistance) * Math.tan(Math.toRadians(this.penombreAngleIntermediaire));
+      System.out.println("Calculs - rayonPenombre : " + this.rayonPenombre);
+      this.angleApparentPenombre = Math.toDegrees(Math.atan(this.rayonPenombre / this.astro.moon.earthMoonDistance));
+      System.out.println("Calculs - angleApparentPenombre : " + this.angleApparentPenombre);
 	}
 	
 	/*

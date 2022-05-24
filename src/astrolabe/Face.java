@@ -407,6 +407,16 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
             );
         ell = new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY()- tempDouble, 2 * tempDouble, 2 * tempDouble);
         g2d.draw(ell);
+
+        tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(-this.astro.calc.sunDeclination - this.astro.calc.angleApparentPenombre)/2  ))*Math.cos(Math.toRadians(this.hemiCoefDec*(this.astro.calc.sunRightAscension+this.astro.calc.angleApparentPenombre+180.0)+this.hemiCoefRA)),
+            this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(-this.astro.calc.sunDeclination - this.astro.calc.angleApparentPenombre)/2  ))*Math.sin(Math.toRadians(this.hemiCoefDec*(this.astro.calc.sunRightAscension+this.astro.calc.angleApparentPenombre+180.0)+this.hemiCoefRA)));
+        tempDouble = Math.sqrt( 
+            (temp.getX()-tempOmbre.getX()) * (temp.getX()-tempOmbre.getX())
+            +
+            (temp.getY()-tempOmbre.getY()) * (temp.getY()-tempOmbre.getY())
+            );
+        ell = new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY()- tempDouble, 2 * tempDouble, 2 * tempDouble);
+        g2d.draw(ell);
       }
     }
     
