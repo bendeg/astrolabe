@@ -488,13 +488,16 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 	
 	private void dessinerTympan() {
 		double distance, rayon, phi=this.astro.coordGeo.getLatitude(), hauteur,
-				horizondistance, horizonrayon,
+				horizondistance = 0.0, horizonrayon = this.astro.capricorne,
 				centrezenith, estouestrayon, droitecentres,
 				distancefoyer, rayonvertical, azimut;
 		
 		if(phi != 0.0)
 			if(phi<0)
 				phi=-phi;
+			else;
+		else phi =  0.000000000001;
+
 		//dessin des almucantarats
 		//distance centre astrolabe au centre de l'almucantarat :
 		//equateur * cos latitude / ( sin latitude + sin hauteur )
@@ -510,7 +513,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		g2d.draw(new Ellipse2D.Double(this.centreX-horizonrayon, this.centreY-horizondistance-horizonrayon, horizonrayon*2.0, horizonrayon*2.0));
 		//System.out.println(distance+" -- "+rayon);
 		//masquer tout sauf la sph�re locale
-
+		
 		//dessin des lignes de cr�puscule
 		g2d.setStroke(dashed);
 		hauteur=-6.0;

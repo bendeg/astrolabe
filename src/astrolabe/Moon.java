@@ -112,7 +112,7 @@ public class Moon {
 		1,0,0,-1,-1335,
 		0,0,3,1,1107,
 		4,0,0,-1,1021,
-		4,0,-1,1,833,
+		4,0,-1,1,833,//fin première colonne
 		0,0,1,-3,777,
 		4,0,-2,1,671,
 		2,0,0,-3,607,
@@ -266,9 +266,9 @@ public class Moon {
 			*/
 		  
 		  tempE=1.0;
-			if(Math.abs(this.moonLongitudeRadiusPeriodicTerms[i+1])==2) 
+			if(Math.abs(this.moonLongitudeRadiusPeriodicTerms[i+1])==2.0) 
 				tempE=this.E*this.E;
-			if (Math.abs(this.moonLongitudeRadiusPeriodicTerms[i+1])==1)
+			if (Math.abs(this.moonLongitudeRadiusPeriodicTerms[i+1])==1.0)
 				tempE=this.E;
 			
 			this.sumL+=this.moonLongitudeRadiusPeriodicTerms[i+4]
