@@ -495,8 +495,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		if(phi != 0.0)
 			if(phi<0)
 				phi=-phi;
-			else;
-		else phi =  0.000000000001;
+//			else;
+//		else phi =  0.000000000001;
 
 		//dessin des almucantarats
 		//distance centre astrolabe au centre de l'almucantarat :
@@ -507,12 +507,14 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		
 
 		//dessin de l'horizon (hauteur=0)
-		g2d.setStroke(gras);
-		horizondistance=astro.equateur*Math.cos(Math.toRadians(phi))/Math.sin(Math.toRadians(phi));
-		horizonrayon=astro.equateur/Math.sin(Math.toRadians(phi));
-		g2d.draw(new Ellipse2D.Double(this.centreX-horizonrayon, this.centreY-horizondistance-horizonrayon, horizonrayon*2.0, horizonrayon*2.0));
-		//System.out.println(distance+" -- "+rayon);
-		//masquer tout sauf la sph�re locale
+		if(phi != 0.0) {
+  		g2d.setStroke(gras);
+  		horizondistance=astro.equateur*Math.cos(Math.toRadians(phi))/Math.sin(Math.toRadians(phi));
+  		horizonrayon=astro.equateur/Math.sin(Math.toRadians(phi));
+  		g2d.draw(new Ellipse2D.Double(this.centreX-horizonrayon, this.centreY-horizondistance-horizonrayon, horizonrayon*2.0, horizonrayon*2.0));
+  		//System.out.println(distance+" -- "+rayon);
+  		//masquer tout sauf la sph�re locale
+		}
 		
 		//dessin des lignes de cr�puscule
 		g2d.setStroke(dashed);
@@ -527,8 +529,13 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		g2d.setStroke(normal);
 
 		//en plus du capricorne, on masque selon l'horizon
-		masque=new Ellipse2D.Double(this.centreX-horizonrayon, this.centreY-horizondistance-horizonrayon, horizonrayon*2.0, horizonrayon*2.0);
-		g2d.clip(masque);
+		if(phi != 0.0) {
+		  masque=new Ellipse2D.Double(this.centreX-horizonrayon, this.centreY-horizondistance-horizonrayon, horizonrayon*2.0, horizonrayon*2.0);
+		  g2d.clip(masque);
+		}
+		else {
+      g2d.clip(new Arc2D.Double(this.centreX-horizonrayon, this.centreY-horizondistance-horizonrayon, horizonrayon*2.0, horizonrayon*2.0, 0.0, 180.0, Arc2D.PIE));
+		}
 		//g2d.drawOval(0, 0, 500, 500);
 
 		//simulation aube/cr�puscule
@@ -639,8 +646,13 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 				g2d.draw(new Arc2D.Double(this.centreX+distancefoyer-rayonvertical, this.centreY+droitecentres-rayonvertical, rayonvertical*2.0, rayonvertical*2.0, 180, -180, Arc2D.OPEN));
 //				g2d.drawOval(this.centreX-(int)distancefoyer-(int)rayonvertical, this.centreY+(int)droitecentres-(int)rayonvertical, (int)rayonvertical*2, (int)rayonvertical*2);
 				g2d.draw(new Arc2D.Double(this.centreX-distancefoyer-rayonvertical, this.centreY+droitecentres-rayonvertical, rayonvertical*2.0, rayonvertical*2.0, 180, -180, Arc2D.OPEN));
+
+//tous les degrés : CPU à 100% !!!				
+//        if(this.astro.affichage.almuvert1.isSelected())
+//          azimut+=1.0;
+//        else
 				
-				if(this.astro.affichage.almuvert5.isSelected())
+        if(this.astro.affichage.almuvert5.isSelected())
 						azimut+=5.0;
 				else
 					azimut+=10.0;
@@ -653,7 +665,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 	}
 	
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		Dimension dim=new Dimension();
+		Dimension dim=new Dimension(), oldDim = this.getPreferredSize();
+		double ratioX, ratioY;
 		Rectangle rect, oldRect;
 		//int centrex, centrey, bottomx, bottomy;
 		//int shift=1;
@@ -669,6 +682,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     }
     //System.out.println("mousewheel : " + this.mousewheel + " - mousewheelSensitivity : " + this.mousewheelSensibility);
 		dim.setSize(this.astro.splitBottomDimension.getWidth()+this.mousewheel, this.astro.splitBottomDimension.getHeight()+this.mousewheel);
+//		System.out.println("Face - wheelmoved - oldDimX : " + oldDim.getWidth() + " - dim X : " + dim.getWidth() + " - rapport : " + (dim.getWidth()/oldDim.getWidth()));
 		oldRect=this.getVisibleRect();
 		//System.out.println("scroll hamout = "+this.astro.sp2.getHorizontalScrollBar().getVisibleAmount()+"scroll hmax = "+this.astro.sp2.getHorizontalScrollBar().getMaximum());
 		//System.out.println("scroll vamout = "+this.astro.sp2.getVerticalScrollBar().getVisibleAmount()+"scroll vmax = "+this.astro.sp2.getVerticalScrollBar().getMaximum());
@@ -695,6 +709,12 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 
 		//ces 2 lignes ne servent à rien apparemment...commentées ou pas, c'est kif-kif bourriquot...
 		rect=new Rectangle(this.mouseX-(oldRect.width/2), this.mouseY-(oldRect.height/2), oldRect.width, oldRect.height);
+
+//		ratioX = dim.getWidth() / oldDim.getWidth();
+//    ratioX *= this.mouseX;
+//    ratioY = dim.getHeight() / oldDim.getHeight();
+//    ratioY *= this.mouseY;
+//    rect=new Rectangle((int)ratioX, (int)ratioY, oldRect.width, oldRect.height);
 //tests    rect=new Rectangle(oldRect.x-this.mouseX+this.mousewheel, oldRect.y-this.mouseY+this.mousewheel, oldRect.width, oldRect.height);
 //    rect=new Rectangle(this.mouseX-(dim.width*this.mouseX/oldRect.width), this.mouseY-(dim.height*this.mouseY/oldRect.height), oldRect.width, oldRect.height);
 		this.scrollRectToVisible(rect);	
