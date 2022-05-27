@@ -34,7 +34,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 	AffineTransform affine, affineTemp;
 	Color color;
 	int mouseX, mouseY;
-	int mousewheel_init=1, mousewheel=0, mousewheelSensibility=100;
+	int mousewheel_init=1, mousewheel=0, mousewheelSensibility=300;
 	double centreX, centreY, tempDouble;
 	transient Stroke dotted = new BasicStroke(1.0f,                      // Width
             BasicStroke.CAP_SQUARE,    // End cap
@@ -669,13 +669,14 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		double ratioX, ratioY;
 		Rectangle rect, oldRect;
 		
+//    System.out.println("Face - e.getWheelRotation " + e.getWheelRotation());//vaut 1 ou -1
     if(this.mousewheel>=0){
       this.mousewheel+=(-e.getWheelRotation()*this.mousewheelSensibility);
     }
     else {
       this.mousewheel = 0;
     }
-    //System.out.println("mousewheel : " + this.mousewheel + " - mousewheelSensitivity : " + this.mousewheelSensibility);
+//    System.out.println("mousewheel : " + this.mousewheel + " - mousewheelSensitivity : " + this.mousewheelSensibility);
 		dim.setSize(this.astro.splitBottomDimension.getWidth()+this.mousewheel, this.astro.splitBottomDimension.getHeight()+this.mousewheel);
 //		System.out.println("Face - wheelmoved - oldDimX : " + oldDim.getWidth() + " - dim X : " + dim.getWidth() + " - rapport : " + (dim.getWidth()/oldDim.getWidth()));
 		oldRect=this.getVisibleRect();
@@ -684,11 +685,11 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		this.mouseY=e.getY();
 		this.setPreferredSize(dim);
 
-//		System.out.println("Face 714 - mouseX : " + this.mouseX + " - mouseY : " + this.mouseY);
+//		System.out.println("Face - mouseX : " + this.mouseX + " - mouseY : " + this.mouseY);
 		ratioX = this.mouseX / oldDim.getWidth() * dim.getWidth();
     ratioY = this.mouseY / oldDim.getHeight() * dim.getHeight();
-//    System.out.println("Face 717 - ratioX : " + ratioX + " - ratioY : " + ratioY);
-//    System.out.println("Face 718 - oldRect x : " + oldRect.x + " - oldRect y : " + oldRect.y);
+//    System.out.println("Face - ratioX : " + ratioX + " - ratioY : " + ratioY);
+//    System.out.println("Face - oldRect x : " + oldRect.x + " - oldRect y : " + oldRect.y);
     rect=new Rectangle((int)ratioX - (this.mouseX - oldRect.x) + 1, (int)ratioY - (this.mouseY - oldRect.y) + 1, oldRect.width, oldRect.height);
 
 		this.scrollRectToVisible(rect);	
