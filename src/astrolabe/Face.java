@@ -670,7 +670,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		Rectangle rect, oldRect;
 		
     if(this.mousewheel>=0){
-      this.mousewheel+=(e.getWheelRotation()*this.mousewheelSensibility);
+      this.mousewheel+=(-e.getWheelRotation()*this.mousewheelSensibility);
     }
     else {
       this.mousewheel = 0;
@@ -689,7 +689,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
     ratioY = this.mouseY / oldDim.getHeight() * dim.getHeight();
 //    System.out.println("Face 717 - ratioX : " + ratioX + " - ratioY : " + ratioY);
 //    System.out.println("Face 718 - oldRect x : " + oldRect.x + " - oldRect y : " + oldRect.y);
-    rect=new Rectangle((int)ratioX - (this.mouseX - oldRect.x), (int)ratioY - (this.mouseY - oldRect.y), oldRect.width, oldRect.height);
+    rect=new Rectangle((int)ratioX - (this.mouseX - oldRect.x) + 1, (int)ratioY - (this.mouseY - oldRect.y) + 1, oldRect.width, oldRect.height);
 
 		this.scrollRectToVisible(rect);	
 		
