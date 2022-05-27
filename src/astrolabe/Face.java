@@ -668,14 +668,9 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		Dimension dim=new Dimension(), oldDim = this.getPreferredSize();
 		double ratioX, ratioY;
 		Rectangle rect, oldRect;
-		//int centrex, centrey, bottomx, bottomy;
-		//int shift=1;
 		
-		//shift=(this.mousewheelSensibility)/2;
-//    if(this.mousewheel>0 || e.getWheelRotation()>0){
     if(this.mousewheel>=0){
       this.mousewheel+=(e.getWheelRotation()*this.mousewheelSensibility);
-      //if(e.getWheelRotation()<0) shift=-shift;
     }
     else {
       this.mousewheel = 0;
@@ -684,42 +679,20 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		dim.setSize(this.astro.splitBottomDimension.getWidth()+this.mousewheel, this.astro.splitBottomDimension.getHeight()+this.mousewheel);
 //		System.out.println("Face - wheelmoved - oldDimX : " + oldDim.getWidth() + " - dim X : " + dim.getWidth() + " - rapport : " + (dim.getWidth()/oldDim.getWidth()));
 		oldRect=this.getVisibleRect();
-		//System.out.println("scroll hamout = "+this.astro.sp2.getHorizontalScrollBar().getVisibleAmount()+"scroll hmax = "+this.astro.sp2.getHorizontalScrollBar().getMaximum());
-		//System.out.println("scroll vamout = "+this.astro.sp2.getVerticalScrollBar().getVisibleAmount()+"scroll vmax = "+this.astro.sp2.getVerticalScrollBar().getMaximum());
-		//centrex=oldRect.x+oldRect.width/2;
-		//centrey=oldRect.y+oldRect.height/2;
-		//bottomx=oldRect.x+oldRect.width;
-		//bottomy=oldRect.y+oldRect.height;
-		//System.out.println("oldrect width = "+oldRect.width+" prefwidth="+oldRect.getWidth()/this.getPreferredSize().getWidth());
-//		if(this.mousewheel>0 || e.getWheelRotation()>0){
-//			this.mousewheel+=(e.getWheelRotation()*this.mousewheelSensibility);
-//			if(e.getWheelRotation()<0) shift=-shift;
-//		}
-		//dim=new Dimension(this.getWidth()+this.mousewheel, this.getHeight()+this.mousewheel);
 		
 		this.mouseX=e.getX();
 		this.mouseY=e.getY();
-		//System.out.println("mouse : X = "+this.mouseX+" Y = "+this.mouseY+" mousewheel = "+this.mousewheel+" e precisewheelrot = "+e.getWheelRotation());
-		//System.out.println("X orig= "+this.getX()+" Y orig="+this.getY()+" x+width="+(this.getX()+oldRect.width));
-		//System.out.println("Prefer width = "+ this.getPreferredSize().getWidth());
-		//System.out.println("Prefer height = "+ this.getPreferredSize().getHeight());
-		//System.out.println("oldRect X = "+oldRect.x+"  Y = "+oldRect.y+" centrex ="+centrex+" centrey = "+centrey+" bottom X = "+bottomx+" bottom Y = "+bottomy);
-		//System.out.println("rect X = "+rect.x+"  Y = "+rect.y);
 		this.setPreferredSize(dim);
 
-		//ces 2 lignes ne servent à rien apparemment...commentées ou pas, c'est kif-kif bourriquot...
-		rect=new Rectangle(this.mouseX-(oldRect.width/2), this.mouseY-(oldRect.height/2), oldRect.width, oldRect.height);
+//		System.out.println("Face 714 - mouseX : " + this.mouseX + " - mouseY : " + this.mouseY);
+		ratioX = this.mouseX / oldDim.getWidth() * dim.getWidth();
+    ratioY = this.mouseY / oldDim.getHeight() * dim.getHeight();
+//    System.out.println("Face 717 - ratioX : " + ratioX + " - ratioY : " + ratioY);
+//    System.out.println("Face 718 - oldRect x : " + oldRect.x + " - oldRect y : " + oldRect.y);
+    rect=new Rectangle((int)ratioX - (this.mouseX - oldRect.x), (int)ratioY - (this.mouseY - oldRect.y), oldRect.width, oldRect.height);
 
-//		ratioX = dim.getWidth() / oldDim.getWidth();
-//    ratioX *= this.mouseX;
-//    ratioY = dim.getHeight() / oldDim.getHeight();
-//    ratioY *= this.mouseY;
-//    rect=new Rectangle((int)ratioX, (int)ratioY, oldRect.width, oldRect.height);
-//tests    rect=new Rectangle(oldRect.x-this.mouseX+this.mousewheel, oldRect.y-this.mouseY+this.mousewheel, oldRect.width, oldRect.height);
-//    rect=new Rectangle(this.mouseX-(dim.width*this.mouseX/oldRect.width), this.mouseY-(dim.height*this.mouseY/oldRect.height), oldRect.width, oldRect.height);
 		this.scrollRectToVisible(rect);	
 		
-		//this.setLocation(this.mouseX, this.mouseY);
 		this.revalidate();
 	}
 
