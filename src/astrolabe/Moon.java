@@ -375,7 +375,7 @@ public class Moon {
 	public void calculateTopocentricEquatorial() {
 	   //RA : correction de la parallaxe (position sur la surface de la Terre)
 	  //"Astronomical Algorithms", 2nd Edition, page 279
-	  double deltaRA, A, B, C, q;
+	  double deltaRA;//, A, B, C, q;
 	  
 	  deltaRA = Math.toDegrees(
 	              Math.atan2(

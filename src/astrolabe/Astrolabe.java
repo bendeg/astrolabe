@@ -137,7 +137,7 @@ static final long serialVersionUID=1;
     
     i = 0;
     String temp = new String();
-    float r=0, v=0, b=0;
+//    float r=1, v=1, b=1;
     double tempMag;
     while (sc.hasNextLine()) {
       if(sc4.hasNextLine()) {
@@ -151,14 +151,14 @@ static final long serialVersionUID=1;
       //System.out.println("Astrolabe - while - tmpStr3 " + tempStr3[2] + "," + tempStr3[3] + "," + tempStr3[4]);
 
       if(tempStr3[3].compareTo("~") == 0) {//pas de Vmag...=> soit B, soit R, soit B et R (il y en a au moins une des deux !
-        v = 6;
+//        v = 6;
         if(tempStr3[2].compareTo("~") == 0) {
-          b = 6;
+//          b = 6;
           tempMag = Double.valueOf(tempStr3[4]);//--R
         }
         else {
           if(tempStr3[4].compareTo("~") == 0) {
-            r = 6;
+//            r = 6;
             tempMag = Double.valueOf(tempStr3[2]);//B--
           }
           else {
@@ -167,11 +167,11 @@ static final long serialVersionUID=1;
         }
       }
       else {
-        if(tempStr3[2].compareTo("~") == 0) b = 6;
-        else b = Float.valueOf(tempStr3[2]);
-        v = Float.valueOf(tempStr3[3]);
-        if(tempStr3[4].compareTo("~") == 0) r = 6;
-        else r = Float.valueOf(tempStr3[4]);
+//        if(tempStr3[2].compareTo("~") == 0) b = 6;
+//        else b = Float.valueOf(tempStr3[2]);
+//        v = Float.valueOf(tempStr3[3]);
+//        if(tempStr3[4].compareTo("~") == 0) r = 6;
+//        else r = Float.valueOf(tempStr3[4]);
         tempMag = Double.valueOf(tempStr3[3]);        
       }
       temp = sc2.nextLine();

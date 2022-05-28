@@ -773,7 +773,8 @@ public double calculateSun() {
 	  double a = 6378.14,
 	        f = 1 / 298.257,
 	        b = a * (1 - f),
-	        e = Math.sqrt(2 * f - f * f), u;
+//	        e = Math.sqrt(2 * f - f * f),
+	        u;
 	  
 	  if (this.astro.coordGeo.getAltitude() == 0.0) {
 	    this.rhoSinLat = b * b * Math.sin(Math.toRadians(this.astro.coordGeo.getLatitude()));

@@ -13,8 +13,6 @@ import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Dimension2D;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -666,7 +664,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 	
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		Dimension dim=new Dimension(), oldDim = this.getPreferredSize();
-		double ratioX, ratioY;
+		double newX, newY;
 		Rectangle rect, oldRect;
 		
 //    System.out.println("Face - e.getWheelRotation " + e.getWheelRotation());//vaut 1 ou -1
@@ -686,11 +684,11 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		this.setPreferredSize(dim);
 
 //		System.out.println("Face - mouseX : " + this.mouseX + " - mouseY : " + this.mouseY);
-		ratioX = this.mouseX / oldDim.getWidth() * dim.getWidth();
-    ratioY = this.mouseY / oldDim.getHeight() * dim.getHeight();
+		newX = this.mouseX / oldDim.getWidth() * dim.getWidth();
+    newY = this.mouseY / oldDim.getHeight() * dim.getHeight();
 //    System.out.println("Face - ratioX : " + ratioX + " - ratioY : " + ratioY);
 //    System.out.println("Face - oldRect x : " + oldRect.x + " - oldRect y : " + oldRect.y);
-    rect=new Rectangle((int)ratioX - (this.mouseX - oldRect.x) + 1, (int)ratioY - (this.mouseY - oldRect.y) + 1, oldRect.width, oldRect.height);
+    rect=new Rectangle((int)newX - (this.mouseX - oldRect.x) + 1, (int)newY - (this.mouseY - oldRect.y) + 1, oldRect.width, oldRect.height);
 
 		this.scrollRectToVisible(rect);	
 		
@@ -717,8 +715,6 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 
 	    public void mouseClicked(MouseEvent e) {
 	       Rectangle rect, oldRect, starSeeker = new Rectangle(3, 3);
-	       boolean hit = false;
-	       int deltaX, deltaY;
 	       
 	       //System.out.println("Mouse clicked (# of clicks: "
 	       //+ e.getClickCount() + ")"+ e.toString());
@@ -731,23 +727,15 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
   	       this.scrollRectToVisible(rect);	
   	       this.revalidate();
 	       }
-	       else {
-	         //System.out.println("clic droit");
-	         //System.out.println("preferred size : " + this.getSize());
-           //System.out.println("visible size : " + this.getVisibleRect().getWidth());
-           deltaX = this.getSize().width - this.getVisibleRect().getSize().width;
-           deltaY = this.getSize().height - this.getVisibleRect().getSize().height;
-           //System.out.println("deltaX : " + deltaX + " - deltaY : " + deltaY);
-           
+	       else {          
            starSeeker.setBounds(e.getX()-2-this.getVisibleRect().x+this.astro.splitPanel.getDividerLocation()+8, e.getY()-2-this.getVisibleRect().y, 4, 4);
 	         //System.out.println("starSeeker : " + starSeeker.x + "," + starSeeker.y);
-	         for(int i=0; i<this.astro.stars.length; i++) {
-	           if(this.g2d.hit(starSeeker, this.astro.stars[i].ellipse, false)) {
-	             //System.out.println("hit! : " + this.astro.stars[i].getId());
-	             hit = true;
-	             this.astro.affichage.astres.setSelectedIndex(this.astro.starsnames.indexOf(this.astro.stars[i].getId()));
-	           }
+           int i = 0;
+           while((i < this.astro.stars.length) && !this.g2d.hit(starSeeker, this.astro.stars[i].ellipse, false)) {
+             i++;
 	         }
+           if(i < this.astro.stars.length)
+             this.astro.affichage.astres.setSelectedIndex(this.astro.starsnames.indexOf(this.astro.stars[i].getId()));
 	       }
 	    }
 	    

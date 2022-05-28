@@ -88,7 +88,7 @@ public class Tictac extends TimerTask {
         
         this.astro.calc.ldt=this.astro.calc.ldt.plusMinutes(Long.parseLong(this.astro.anim.dMinT.getText()));
   			
-  			this.astro.calc.ldt=this.astro.calc.ldt.plusSeconds(Long.parseLong(this.astro.anim.dSecT.getText().split("[^0-9]")[0]));
+  			this.astro.calc.ldt=this.astro.calc.ldt.plusSeconds(Long.parseLong(this.astro.anim.dSecT.getText().split("[^0-9^\\-]")[0]));
   		}
 			this.astro.anim.anT.setText(String.valueOf(this.astro.calc.ldt.getYear()));
 			this.astro.anim.moisT.setText(String.valueOf(this.astro.calc.ldt.getMonthValue()));
