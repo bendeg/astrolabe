@@ -128,7 +128,11 @@ public class Tictac extends TimerTask {
 		 */
 	
     this.astro.calc.calculateAll();
-
+    
+//    System.out.println("Tictac - date suivante (mois synodique) : " + this.astro.calc.ldt.toLocalDateTime().toString()
+//        + " " + this.astro.calc.ldt.plusSeconds(2551443).toLocalDateTime().toString()
+//        );
+    
     astro.setTitle("Astrolabe - Date = "+this.astro.calc.ldt.toLocalDate().toString()
 						+" - H. locale ("+heureEte+") = "+String.format("%tT", this.astro.calc.ldt.toLocalTime())
 						+" ("+ZoneId.systemDefault().toString()+")"

@@ -370,6 +370,7 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
       if(this.astro.affichage.checkModeEclipse.isSelected()) {
         tempOmbre.setLocation(this.centreX-astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.calc.sunDeclination + this.astro.calc.angleApparentSoleil)/2))*Math.cos(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+ this.astro.calc.angleApparentSoleil+this.hemiCoefRA)),
             this.centreY+astro.equateur*Math.tan(Math.toRadians(45.0-this.hemiCoefDec*(this.astro.calc.sunDeclination + this.astro.calc.angleApparentSoleil)/2))*Math.sin(Math.toRadians(this.hemiCoefDec*this.astro.calc.sunRightAscension+ this.astro.calc.angleApparentSoleil+this.hemiCoefRA)));
+        g2d.setStroke(new java.awt.BasicStroke(0));
         tempDouble = Math.sqrt( 
             (temp.getX()-tempOmbre.getX()) * (temp.getX()-tempOmbre.getX())
             +
@@ -426,12 +427,13 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
   		g2d.setColor(Color.GRAY);
       g2d.setStroke(normal);
       if(this.astro.affichage.checkModeEclipse.isSelected() ) {
-      tempDouble = Math.sqrt( 
-          (temp.getX()-tempOmbre.getX()) * (temp.getX()-tempOmbre.getX())
-          +
-          (temp.getY()-tempOmbre.getY()) * (temp.getY()-tempOmbre.getY())
-          );
-      ell = new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY()- tempDouble, 2 * tempDouble, 2 * tempDouble);
+        g2d.setStroke(new java.awt.BasicStroke(0));
+        tempDouble = Math.sqrt( 
+            (temp.getX()-tempOmbre.getX()) * (temp.getX()-tempOmbre.getX())
+            +
+            (temp.getY()-tempOmbre.getY()) * (temp.getY()-tempOmbre.getY())
+            );
+        ell = new Ellipse2D.Double(temp.getX() - tempDouble, temp.getY()- tempDouble, 2 * tempDouble, 2 * tempDouble);
       }
       else {
         ell = new Ellipse2D.Double(temp.getX()-7, temp.getY()-7, 14, 14);
