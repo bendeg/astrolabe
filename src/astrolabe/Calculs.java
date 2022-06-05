@@ -2,6 +2,7 @@ package astrolabe;
 
 import java.time.DateTimeException;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.zone.ZoneRules;
@@ -534,6 +535,63 @@ public double calculateSun() {
 		//"Nutation and the Obliquity of the Ecliptic"
 		this.jde=this.jd+(this.deltaT/24.0/3600.0);
 		//System.out.println("JD = "+this.jd+" JDE="+this.jde);
+	}
+	
+	public void checkNumbersPrecision() {
+//    System.out.println("Calculs - check precision - negative integer : INT(7.895) = " + this.truncate(7.895));
+//	  System.out.println("Calculs - check precision - negative integer : INT(-7.895) = " + this.truncate(-7.895));
+//	  System.out.println("Calculs - check precision - calendar date for JD 2436116.31 = " + this.dateFromJulianDay(2436116.31));
+//    System.out.println("Calculs - check precision - calendar date for JD 1842713.0 = " + this.dateFromJulianDay(1842713.0));
+//    System.out.println("Calculs - check precision - calendar date for JD 1507900.13 = " + this.dateFromJulianDay(1507900.13));
+	}
+	
+	public int truncate(double number) {
+	  return (int) (number - number % 1);
+	}
+	
+	public LocalDateTime dateFromJulianDay(double julianDay) {
+	  //valide pour toutes les date SAUF les jours juliens
+	  //négatifs ( < année -4716 )
+	  int alpha, A, B, C, E, Z,
+	      year, month, hour, minute, second, nanosecond;
+	  double D, F,
+	          temp;
+	  
+	  julianDay += 0.5;
+    System.out.println("Calculs - dateFromJulianDay - julianDay = " + julianDay);
+	  Z = this.truncate(julianDay);
+	  F = julianDay - Z;
+	  System.out.println("Calculs - dateFromJulianDay - Z = " + Z + ", F = " + F);
+	  
+	  if(Z < 2299161) A = Z;
+	  else {
+	    alpha = this.truncate((Z - 1867216.25) / 36524.25);
+	    A = Z + 1 + alpha - this.truncate(alpha / 4);
+	  }
+	  
+	  B = A + 1524;
+	  C = this.truncate((B - 122.1) / 365.25);
+	  D = this.truncate((365.25 * C));
+	  E = this.truncate((int) ((B - D) / 30.6001));
+	  
+	  D = B - D - this.truncate((30.6001 * E)) + F;
+	  System.out.println("Calculs - dateFromJulianDay - D = " + D);
+	  if( E < 14) month = E - 1;
+	  else month = E - 13;//( E == 14 || E == 15)
+	  
+	  if( month > 2) year = C - 4716;
+	  else year = C - 4715;//(month == 1 || month == 2) 
+	  
+	  temp = (D - this.truncate(D)) * 24;//heures  + décimales
+	  hour = this.truncate(temp);
+	  temp = (temp - hour) * 60;//minutes + décimales
+	  minute = this.truncate(temp);
+	  temp = (temp - minute) * 60;//secondes + décimales
+	  second = this.truncate(temp);
+	  temp = (temp - second) * 1000000000;//nanoseconde + décimales
+	  nanosecond = this.truncate(temp);
+	  
+	  return LocalDateTime.of(year, month, this.truncate(D), hour, minute, second, nanosecond);
 	}
 	
 	public double calculateEcliptic() {

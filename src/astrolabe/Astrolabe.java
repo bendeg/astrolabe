@@ -197,15 +197,20 @@ static final long serialVersionUID=1;
     }
     //System.out.println("Astrolabe - stars taille : " + this.stars.length);
     //System.out.println("Astrolabe - stars - vector index de tau-Cyg : " + this.starsnames.indexOf("tau-Cyg"));
-    
+    System.out.println(file.getAbsolutePath() + " chargé.");
+    System.out.println(file2.getAbsolutePath() + " chargé.");
+    System.out.println(file3.getAbsolutePath() + " chargé.");
+    System.out.println(file4.getAbsolutePath() + " chargé.");
+
     //mise en place des astérismes
     for(i=0; i<this.asterismes.length; i++) {
       //System.out.println("Astrolabe - asterismes - " + this.asterismes[i][0] + " <---> " +  this.asterismes[i][1]);
       this.stars[this.starsnames.indexOf(this.asterismes[i][0])].addNextAstre(this.stars[this.starsnames.indexOf(this.asterismes[i][1])]);
     }
     
-		face=new Face(this);
-		calc=new Calculs(this);
+		this.face=new Face(this);
+		this.calc=new Calculs(this);
+		this.calc.checkNumbersPrecision();
 		
 		//super("Astrolabe");
 		WindowListener l = new WindowAdapter() {
