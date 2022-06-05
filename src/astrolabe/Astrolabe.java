@@ -298,7 +298,7 @@ static final long serialVersionUID=1;
 		this.sp2.setWheelScrollingEnabled(false);
 		//System.out.println("sp2 scroll mouse ? = "+this.sp2.isWheelScrollingEnabled());
 		
-		this.splitBottomDimension=new Dimension(800, 800);
+		this.splitBottomDimension=new Dimension(1100, 1100);
 		this.face.setPreferredSize(this.splitBottomDimension);
 		
 

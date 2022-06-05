@@ -671,7 +671,8 @@ public class Face extends JPanel implements MouseWheelListener, MouseListener, M
 		
 //    System.out.println("Face - e.getWheelRotation " + e.getWheelRotation());//vaut 1 ou -1
     if(this.mousewheel>=0){
-      this.mousewheel+=(-e.getWheelRotation()*this.mousewheelSensibility);
+//      this.mousewheel += (-e.getWheelRotation()*this.mousewheelSensibility);
+      this.mousewheel += -e.getWheelRotation() * this.astro.splitBottomDimension.getWidth() / 8;
     }
     else {
       this.mousewheel = 0;

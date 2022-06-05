@@ -93,7 +93,7 @@ public class Affichage extends JPanel {
 		this.magLabel.setForeground(Color.RED);
 		this.add(this.magLabel);
 
-		magSlider=new JSlider(JSlider.HORIZONTAL, -1, 6, 6);
+		magSlider=new JSlider(JSlider.HORIZONTAL, -1, 6, 4);
 		this.gbc.gridx=1;
 		this.gbc.gridy=3;
 		this.gb.setConstraints(this.magSlider, this.gbc);
