@@ -8,7 +8,7 @@ import java.io.IOException;
 //import java.net.URISyntaxException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-//import java.nio.file.Files;
+
 import java.nio.file.Path;
 //import java.nio.file.Paths;
 import java.io.FileWriter;
@@ -115,7 +115,7 @@ static double ground_stations[]={
 	            this.loadAlmanach(httpConn);
 	        }
           else {
-            System.out.println("Pas reçu un fichier texte ou URL incorrecte :-(");
+            System.out.println("URL et/ou mimetype incorrect/s :-(");
             System.out.println("URL : " + httpConn.getURL().toExternalForm());
             //System.out.println("Chargement à partir du fichier local...");
             loadAlmanachFromFile();
@@ -140,6 +140,8 @@ static double ground_stations[]={
 public int loadAlmanachFromFile() {
   File file = new File("almanac.yuma.txt");
   Scanner sc;
+
+  java.time.LocalDateTime ld = java.time.Instant.ofEpochMilli(file.lastModified()).atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
   
   //ouverture et lecture du fichier
   try {
@@ -148,7 +150,14 @@ public int loadAlmanachFromFile() {
     String[] stringTemp;
     int index=0;
     this.satellitesGPS=new SatelliteGPS[32];
-    System.out.println("Chargement du dernier alamanach GPS officiel enregistré dans le dossier local...");
+    System.out.println("Chargement du dernier alamanach GPS officiel ("
+                + ld.getDayOfMonth() + "/" 
+                + ld.getMonthValue() + "/"
+                + ld.getYear() + " - "
+                + ld.getHour() + ":"
+                + ld.getMinute() + ":"
+                + ld.getSecond() 
+                + ") enregistré dans le dossier local...");
 
     while (sc.hasNextLine()) {
       line = sc.nextLine();
