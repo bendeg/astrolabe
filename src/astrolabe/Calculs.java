@@ -543,6 +543,54 @@ public double calculateSun() {
 //	  System.out.println("Calculs - check precision - calendar date for JD 2436116.31 = " + this.dateFromJulianDay(2436116.31));
 //    System.out.println("Calculs - check precision - calendar date for JD 1842713.0 = " + this.dateFromJulianDay(1842713.0));
 //    System.out.println("Calculs - check precision - calendar date for JD 1507900.13 = " + this.dateFromJulianDay(1507900.13));
+	   
+	  //page 17, arithmétique simple des type 'double'
+	  double x = 1;
+	  int bits = 0, chiffresSignificatifs;
+	  x *= 2;
+    while( ((x + 1) != x) && (x >= 0)) {
+      bits++;
+      x *= 2;
+	  }
+    chiffresSignificatifs = this.truncate(bits * Math.log10(2));
+	  System.out.println("Nombres type 'double' : " + bits + " bits significatifs => " +  chiffresSignificatifs + " chiffres significatifs.");
+	  
+	  //page 18, fonctions trigonométriques
+	  System.out.print("Précision trigonométrie ? ");
+	  if( 
+	      ((4 * Math.atan(1) == Math.PI)) 
+	      &&
+	      ( (Math.sin(0.61) - 0.5728674601004813) < Math.pow(10, chiffresSignificatifs)) 
+	    )
+	    System.out.println("OK");
+	  else {
+      System.out.println("KO...");
+	  }
+	  
+	  //page 18, test précision
+	  x = 1.0000001;
+	  for(int i=1; i <= 27; i++) {
+      //System.out.print(i + ") " + x + "² = ");
+	    x = x * x;
+	    //System.out.println(x);
+	  }
+	  if(Math.abs(x - 674530.4707) < 0.0001)
+	    System.out.println("Precision OK");
+	  else 
+      System.out.println("Precision KO : moins bonne qu'espéré...");
+	  
+	  //page 20
+    System.out.println("3 * 1 / 3 = " + (3 * 1 / 3) + " différent de  3 * (1 / 3) = " + (3 * (1 / 3)) + " !!!");
+    System.out.println("1 / 3 = " + 1 / 3 + " est différent de 1.0 / 3 = " + 1.0 / 3 + " !!!");
+	  
+	  //page 20
+	  x = 0.1;
+	  System.out.println("INT(1000 * 0.1) = " + this.truncate(1000 * x));
+	  
+	  //page 20
+	  System.out.println("Integer min/max = " + Integer.MIN_VALUE + " / " + Integer.MAX_VALUE);
+	  System.out.println("Long min/max = " + Long.MIN_VALUE + " / " + Long.MAX_VALUE);
+    
 	}
 	
 	public int truncate(double number) {

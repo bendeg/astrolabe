@@ -17,7 +17,7 @@ public class Moon {
 	Astrolabe astro;
 	//Periodic terms for Moon latitude
 	//D,M,M',F,El, Er
-	long[] moonLongitudeRadiusPeriodicTerms = new long[]{ 
+	double[] moonLongitudeRadiusPeriodicTerms = new double[]{ 
 		0,0,1,0,6288774,-20905355,
 		2,0,-1,0,1274027,-3699111,
 		2,0,0,0,658314,-2955968,
@@ -82,7 +82,7 @@ public class Moon {
 	
 	//Periodic terms for Moon latitude
 	//D,M,M',F,Eb
-	long[] moonLatitudePeriodicTerms = new long[]{ 
+	double[] moonLatitudePeriodicTerms = new double[]{ 
 		0,0,0,1,5128122,
 		0,0,1,1,280602,
 		0,0,1,-1,277693,

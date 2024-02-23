@@ -15,7 +15,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.geom.Ellipse2D;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import javax.imageio.IIOException;
+//import javax.imageio.IIOException;
 
 import javax.imageio.ImageIO;
 //import javax.swing.ImageIcon;

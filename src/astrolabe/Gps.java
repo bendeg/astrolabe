@@ -74,24 +74,30 @@ static double ground_stations[]={
 		//fichier YUMA : ".\current.alm"
 		//source internet : http://www.navcen.uscg.gov/?pageName=gpsAlmanacs
 		//file URI = http://www.navcen.uscg.gov/?pageName=currentAlmanac&format=yuma
-
+	  
+    System.out.println("Création connexion vers site almanach GPS...");
 	  try {
-    	//14/02/2019 : navcen.uscg.gov KO => utiliser : https://celestrak.com/GPS/almanac/Yuma/almanac.yuma.txt
-    	//URL url = new URL("https://navcen.uscg.gov/?pageName=currentAlmanac&format=yuma");
-		  URL url = new URL("https://celestrak.com/GPS/almanac/Yuma/almanac.yuma.txt");
+	    //14/02/2019 : navcen.uscg.gov KO => utiliser : https://celestrak.com/GPS/almanac/Yuma/almanac.yuma.txt
+    	//URL url = new URL("https://navcen.uscg.gov/?pageName=currentAlmanac&format=yuma");//obsolète
+	    //URL url = new URL("https://navcen.uscg.gov/sites/default/files/gps/almanac/current_yuma.alm");//application/octet-stream
+		  URL url = new URL("https://celestrak.com/GPS/almanac/Yuma/almanac.yuma.txt");//text/plain
 	        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-	        //System.out.println("httpConn code réponse : " + httpConn.getResponseCode());
-	        //System.out.println("GPS - httpConn - content type : " + httpConn.getContentType());
+	        System.out.println("httpConn code réponse : " + httpConn.getResponseCode());
+	        System.out.println("GPS - httpConn - content type : " + httpConn.getContentType());
 	        
-	        if(httpConn.getResponseCode() == 200)
-	          if(httpConn.getContentType().compareTo("text/plain") == 0) 
+	        if( (httpConn.getResponseCode() == 200) 
+	          && (httpConn.getContentType().compareTo("text/plain") == 0) )
+            //&& (httpConn.getContentType().compareTo("application/octet-stream") == 0) )
+	        {
+	            System.out.println("GPS : loadAlmanach()");
 	            this.loadAlmanach(httpConn);
-	          else {
-	            System.out.println("Pas reçu un fichier texte (URL incorrecte?)");
-	            System.out.println("URL : " + httpConn.getURL().toExternalForm());
-	            System.out.println("Chargement à partir du fichier local...");
-	            loadAlmanachFromFile();
-	          }
+	        }
+          else {
+            System.out.println("Pas reçu un fichier texte ou URL incorrecte :-(");
+            System.out.println("URL : " + httpConn.getURL().toExternalForm());
+            //System.out.println("Chargement à partir du fichier local...");
+            loadAlmanachFromFile();
+          }
 	        
 		//vérification création satellites
 		/*
@@ -102,8 +108,10 @@ static double ground_stations[]={
 				System.out.println("Satellite #"+i+" non défini dans l'almanach");
 		}
 		*/
-      } catch (IOException x) {
-        System.err.println(x);
+      } 
+  	  catch (IOException x) {
+          System.err.println(x);
+          loadAlmanachFromFile();
       }
 	  }
 	  
@@ -118,7 +126,7 @@ public int loadAlmanachFromFile() {
     String[] stringTemp;
     int index=0;
     this.satellitesGPS=new SatelliteGPS[32];
-    System.out.println("Dernier alamanach GPS officiel enregistré sur disque...");
+    System.out.println("Chargement du dernier alamanach GPS officiel enregistré dans le dossier local...");
 
     while (sc.hasNextLine()) {
       line = sc.nextLine();
@@ -192,7 +200,7 @@ public int loadAlmanachFromFile() {
   }
   catch(FileNotFoundException e) {
     System.out.println(e.getMessage());
-    System.err.println("Chargement almanach KO : pas de fichier local et/ou problème internet !");
+    System.err.println("Chargement almanach KO : pas de fichier local ET problème de connexion internet !");
     System.exit(-1);
   }
 
@@ -205,11 +213,11 @@ public int loadAlmanach(HttpURLConnection httpConn) {
     InputStream in = httpConn.getInputStream();     
     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
     
-    FileWriter fw = new FileWriter("almanac.yuma.txt");//sauvegarde sur disque au cas où pas internet... 
+    FileWriter fw = new FileWriter("almanac.yuma.txt");//sauvegarde sur disque au cas où internet OK 
          		  
     String line = null;
     this.satellitesGPS=new SatelliteGPS[32];
-    System.out.println("Chargement du dernier alamanach GPS officiel...");
+    System.out.println("Reçu dernier almanach GPS officiel : enregistrement dans le dossier local...");
     while ((line = reader.readLine()) != null) {
       //System.out.println(line);
       fw.write(line+"\n");
