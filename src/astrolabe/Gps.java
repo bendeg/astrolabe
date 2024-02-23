@@ -2,6 +2,7 @@ package astrolabe;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 //import java.net.URISyntaxException;
@@ -17,6 +18,7 @@ import java.util.regex.PatternSyntaxException;
 import javafx.geometry.Point3D;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Properties;
 
 public class Gps {
 
@@ -69,6 +71,22 @@ static double ground_stations[]={
 	Path file;
 	
 	public Gps() {
+	  String gpsurl = null, gpsmimetype = null;
+	  
+	  try (InputStream input = new FileInputStream("application.properties")) {
+	    Properties prop = new Properties();
+	      prop.load(input);
+	      gpsurl = new String(prop.getProperty("gps-url"));
+	      gpsmimetype = new String(prop.getProperty("gps-mimetype"));
+//	      System.out.println(prop.getProperty("gps-url"));
+//        System.out.println(gpsurl);
+//        System.out.println(mimetype);
+	      input.close();
+	  } catch (IOException ex) {
+	      ex.printStackTrace();
+	  }
+	  
+	  
 		//Lire l'almanach des satellites GPS
 		//et créer les 32 satellites GPS
 		//fichier YUMA : ".\current.alm"
@@ -80,13 +98,17 @@ static double ground_stations[]={
 	    //14/02/2019 : navcen.uscg.gov KO => utiliser : https://celestrak.com/GPS/almanac/Yuma/almanac.yuma.txt
     	//URL url = new URL("https://navcen.uscg.gov/?pageName=currentAlmanac&format=yuma");//obsolète
 	    //URL url = new URL("https://navcen.uscg.gov/sites/default/files/gps/almanac/current_yuma.alm");//application/octet-stream
-		  URL url = new URL("https://celestrak.com/GPS/almanac/Yuma/almanac.yuma.txt");//text/plain
-	        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+		  //URL url = new URL("https://celestrak.com/GPS/almanac/Yuma/almanac.yuma.txt");//text/plain
+//	    System.out.println(gpsurl);
+//	    System.out.println(gpsmimetype);
+	    
+		  URL url = new URL(gpsurl);
+          HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
 	        System.out.println("httpConn code réponse : " + httpConn.getResponseCode());
 	        System.out.println("GPS - httpConn - content type : " + httpConn.getContentType());
 	        
 	        if( (httpConn.getResponseCode() == 200) 
-	          && (httpConn.getContentType().compareTo("text/plain") == 0) )
+	          && (httpConn.getContentType().compareTo(gpsmimetype) == 0) )
             //&& (httpConn.getContentType().compareTo("application/octet-stream") == 0) )
 	        {
 	            System.out.println("GPS : loadAlmanach()");
