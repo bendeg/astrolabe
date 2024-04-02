@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project astrolabe">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="${dir.buildfile}/.."/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/astrolabe_java11_x64.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="astrolabe.Astrolabe"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jfr.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/dnsns.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/localedata.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunjce_provider.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunec.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunpkcs11.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/icedtea-sound.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/java-atk-wrapper.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/zipfs.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/cldrdata.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jaccess.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/javafx-base-11.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/javafx-controls-11.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/javafx-fxml-11.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/javafx-graphics-11.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/javafx-media-11.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/javafx-swing-11.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/javafx-web-11.jar"/>
+        </jar>
+    </target>
+</project>

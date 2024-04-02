@@ -315,7 +315,7 @@ static final long serialVersionUID=1;
 		//DisplayMode[] dm=myDevice.getDisplayModes();
 		
 		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
 		    astrolabe.setVisible(true);
 		    astrolabe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			astrolabe.setResizable(true);   
@@ -326,6 +326,7 @@ static final long serialVersionUID=1;
 		    	System.out.println("Display mode("+i+") ="+dm[i].getWidth()+" x "+dm[i].getHeight());
 		    */
 		} 
+	
 		catch (UnsupportedLookAndFeelException e) {
 		       // handle exception
 		    }
@@ -340,6 +341,7 @@ static final long serialVersionUID=1;
 		    }
 		finally {
 		    //myDevice.setFullScreenWindow(null);
-		}  
+		} 
+	
 	}	
 }
