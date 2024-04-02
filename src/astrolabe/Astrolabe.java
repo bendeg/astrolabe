@@ -315,7 +315,7 @@ static final long serialVersionUID=1;
 		//DisplayMode[] dm=myDevice.getDisplayModes();
 		
 		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 		    astrolabe.setVisible(true);
 		    astrolabe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			astrolabe.setResizable(true);   

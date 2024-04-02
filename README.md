@@ -3,7 +3,7 @@
 
 Basic astrolabe written in Java (v1.8)
 <br>Inspired by <a href="https://www.softpaz.com/software/download-the-electric-astrolabe-windows-45796.htm">The Electric Astrolabe</a>
-<p>Tested on Windows 10 and Linux Debian Buster</p>
+<p>Tested on Windows 10, Linux Debian Buster/Bullseye, Ubuntu 22.04 LTS (java 11+) </p>
 UI in French...
 <br>
 Works offline (GPS almanach read from local folder, updated last time you ran the application with online access)
