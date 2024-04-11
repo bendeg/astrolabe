@@ -311,11 +311,10 @@ static final long serialVersionUID=1;
 	}
 	
 	public static void main(String[] args) {
+		JFrame.setDefaultLookAndFeelDecorated(true);
 		JFrame astrolabe = new Astrolabe();
-		
-		//ne fonctionne pas...
-		//ImageIcon icon = new ImageIcon("/home/ben/Documents/IT/JAVA/astrolabe/astro16.ico");
-		//astrolabe.setIconImage(icon.getImage());
+		ImageIcon icon = new ImageIcon("astro.png");
+		astrolabe.setIconImage(icon.getImage());
 		
 		//GraphicsDevice myDevice=GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();;
 		//DisplayMode[] dm=myDevice.getDisplayModes();
@@ -324,7 +323,7 @@ static final long serialVersionUID=1;
 			//UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 			//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-			
+			//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 			astrolabe.setVisible(true);
 		    astrolabe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			astrolabe.setResizable(true);   
