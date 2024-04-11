@@ -12,7 +12,7 @@ import java.awt.Dimension;
 import javafx.geometry.Point3D;
 
 import javax.swing.JFrame;
-import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon;
 
 import java.awt.event.*;
 
@@ -311,10 +311,10 @@ static final long serialVersionUID=1;
 	}
 	
 	public static void main(String[] args) {
-		JFrame.setDefaultLookAndFeelDecorated(true);
+		//JFrame.setDefaultLookAndFeelDecorated(true); // => click droit ne fonctionne plus sur les étoiles !!!
 		JFrame astrolabe = new Astrolabe();
-		ImageIcon icon = new ImageIcon("astro.png");
-		astrolabe.setIconImage(icon.getImage());
+		//ImageIcon icon = new ImageIcon("astro.png");
+		//astrolabe.setIconImage(icon.getImage());
 		
 		//GraphicsDevice myDevice=GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();;
 		//DisplayMode[] dm=myDevice.getDisplayModes();
