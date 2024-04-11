@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import javafx.geometry.Point3D;
 
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 
 import java.awt.event.*;
 
@@ -311,12 +312,20 @@ static final long serialVersionUID=1;
 	
 	public static void main(String[] args) {
 		JFrame astrolabe = new Astrolabe();
+		
+		//ne fonctionne pas...
+		//ImageIcon icon = new ImageIcon("/home/ben/Documents/IT/JAVA/astrolabe/astro16.ico");
+		//astrolabe.setIconImage(icon.getImage());
+		
 		//GraphicsDevice myDevice=GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();;
 		//DisplayMode[] dm=myDevice.getDisplayModes();
 		
 		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-		    astrolabe.setVisible(true);
+			//UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+			//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+			
+			astrolabe.setVisible(true);
 		    astrolabe.setExtendedState(JFrame.MAXIMIZED_BOTH);
 			astrolabe.setResizable(true);   
 		    //myDevice.setFullScreenWindow(astrolabe);
