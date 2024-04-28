@@ -882,15 +882,17 @@ public double calculateSun() {
 //	        e = Math.sqrt(2 * f - f * f),
 	        u;
 	  
+	  /*calculs erronés quand l'altitude = 0 !
 	  if (this.astro.coordGeo.getAltitude() == 0.0) {
 	    this.rhoSinLat = b * b * Math.sin(Math.toRadians(this.astro.coordGeo.getLatitude()));
 	    this.rhoCosLat = a * a * Math.cos(Math.toRadians(this.astro.coordGeo.getLatitude()));
 	  }
 	  else {
+	  */
 	    u = Math.atan2(b * Math.tan(Math.toRadians(this.astro.coordGeo.getLatitude())), a);
 	    this.rhoSinLat = (b / a) * Math.sin(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.sin(Math.toRadians(this.astro.coordGeo.getLatitude())));
 	    this.rhoCosLat = Math.cos(u) + (this.astro.coordGeo.getAltitude() / 6378140.0 * Math.cos(Math.toRadians(this.astro.coordGeo.getLatitude())));
-	  }
+	  //}
 	  
 	  //System.out.println("Calculs = rhoSinLat et rhosCosLat :" + this.rhoSinLat + ", " + this.rhoCosLat);
 	}
