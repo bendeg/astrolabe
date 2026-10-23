@@ -112,6 +112,7 @@ static double ground_stations[]={
 	        System.out.println("httpConn code réponse : " + httpConn.getResponseCode());
 	        System.out.println("GPS - httpConn - content type : " + httpConn.getContentType());
 	        
+	       if(httpConn.getContentType() != null) {
 	        if( (httpConn.getResponseCode() == 200) 
 	          && (httpConn.getContentType().compareTo(gpsmimetype) == 0) )
             //&& (httpConn.getContentType().compareTo("application/octet-stream") == 0) )
@@ -119,12 +120,14 @@ static double ground_stations[]={
 	            System.out.println("GPS : loadAlmanach()");
 	            this.loadAlmanach(httpConn);
 	        }
-          else {
-            System.out.println("URL et/ou mimetype incorrect/s :-(");
-            System.out.println("URL : " + httpConn.getURL().toExternalForm());
-            //System.out.println("Chargement à partir du fichier local...");
-            loadAlmanachFromFile();
-          }
+	        else {}
+	       }
+           else {
+	        System.out.println("URL/mimetype incorrect/site hors ligne :-(");
+	        System.out.println("URL : " + httpConn.getURL().toExternalForm());
+	        System.out.println("Chargement à partir du fichier local...");
+	        loadAlmanachFromFile();
+           }
 	        
 		//vérification création satellites
 		/*
