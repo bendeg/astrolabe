@@ -14,7 +14,9 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.Ellipse2D;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
+//import java.net.URL;
 //import javax.imageio.IIOException;
 
 import javax.imageio.ImageIO;
@@ -31,7 +33,8 @@ public class Monde extends JPanel implements MouseWheelListener, MouseListener, 
 	static final long serialVersionUID=1;
 	
 Astrolabe astro;
-URL url;
+//URL url;
+URI uri;
 HttpURLConnection httpConn;
 BufferedImage image;
 Graphics2D g2d;
@@ -67,22 +70,29 @@ double	ratio;
 		if(! trouve) {
       try {
         File mercatorProjection = new File("Mercator-projection.jpg"); 
-        this.url = new URL("https://github.com/bendeg/astrolabe/raw/master/Mercator-projection.jpg");
-        
-        this.httpConn = (HttpURLConnection) url.openConnection();
+//        this.url = new URL("https://github.com/bendeg/astrolabe/raw/master/Mercator-projection.jpg");
+        this.uri = new URI("https://github.com/bendeg/astrolabe/raw/master/Mercator-projection.jpg");
+//        this.httpConn = (HttpURLConnection) url.openConnection();
+        this.httpConn = (HttpURLConnection) this.uri.toURL().openConnection();
         //int responseCode = httpConn.getResponseCode();
         InputStream in = httpConn.getInputStream();
         this.image=ImageIO.read(in);
 
         //Sauvegarde de l'image dans le répertoire courant
         ImageIO.write(this.image, "JPG", mercatorProjection);
-        System.out.println(mercatorProjection.getName() + " trouvé à l'adresse " + this.url.toString() +  ", enregistré localement (" + mercatorProjection.getAbsolutePath() + ") et chargé");
+//        System.out.println(mercatorProjection.getName() + " trouvé à l'adresse " + this.url.toString() +  ", enregistré localement (" + mercatorProjection.getAbsolutePath() + ") et chargé");
+        System.out.println(mercatorProjection.getName() + " trouvé à l'adresse " + this.uri.toURL().toString() +  ", enregistré localement (" + mercatorProjection.getAbsolutePath() + ") et chargé");
       }
       catch(IOException ioe) {
         System.err.println(ioe);          
         System.out.println("impossible de charger la carte Mercator...");
         System.exit(-1);
       }
+      catch(URISyntaxException x) {
+          System.err.println(x);          
+          System.out.println("impossible de charger la carte Mercator...");
+          System.exit(-1);
+        }
 		}
 		else {
 		}

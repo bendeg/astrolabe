@@ -17,7 +17,9 @@ import java.util.regex.PatternSyntaxException;
 
 import javafx.geometry.Point3D;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
+//import java.net.URL;
 import java.util.Properties;
 
 public class Gps {
@@ -102,8 +104,11 @@ static double ground_stations[]={
 //	    System.out.println(gpsurl);
 //	    System.out.println(gpsmimetype);
 	    
-		  URL url = new URL(gpsurl);
-          HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+//		  URL url = new URL(gpsurl);
+		  URI uri = new URI(gpsurl);
+		  
+//          HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+          HttpURLConnection httpConn = (HttpURLConnection) uri.toURL().openConnection();
 	        System.out.println("httpConn code réponse : " + httpConn.getResponseCode());
 	        System.out.println("GPS - httpConn - content type : " + httpConn.getContentType());
 	        
@@ -135,6 +140,10 @@ static double ground_stations[]={
           System.err.println(x);
           loadAlmanachFromFile();
       }
+	  catch (URISyntaxException x) {
+	      System.err.println(x);
+	      loadAlmanachFromFile();
+	  }
 	  }
 	  
 public int loadAlmanachFromFile() {
