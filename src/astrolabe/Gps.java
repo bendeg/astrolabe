@@ -73,13 +73,16 @@ static double ground_stations[]={
 	Path file;
 	
 	public Gps() {
-	  String gpsurl = null, gpsmimetype = null;
+	  String gpsurl = null
+//			  varaiable gsmmimetype plus utilisé (voir commentaire dans application.properties
+//			  ,gpsmimetype = null
+			  ;
 	  
 	  try (InputStream input = new FileInputStream("application.properties")) {
 	    Properties prop = new Properties();
 	      prop.load(input);
 	      gpsurl = new String(prop.getProperty("gps-url"));
-	      gpsmimetype = new String(prop.getProperty("gps-mimetype"));
+//	      gpsmimetype = new String(prop.getProperty("gps-mimetype"));
 //	      System.out.println(prop.getProperty("gps-url"));
 //        System.out.println(gpsurl);
 //        System.out.println(mimetype);
@@ -108,19 +111,21 @@ static double ground_stations[]={
 		  URI uri = new URI(gpsurl);
 		  
 //          HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-          HttpURLConnection httpConn = (HttpURLConnection) uri.toURL().openConnection();
+            HttpURLConnection httpConn = (HttpURLConnection) uri.toURL().openConnection();
 	        System.out.println("httpConn code réponse : " + httpConn.getResponseCode());
 	        System.out.println("GPS - httpConn - content type : " + httpConn.getContentType());
 	        
-	       if(httpConn.getContentType() != null) {
-	        if( (httpConn.getResponseCode() == 200) 
-	          && (httpConn.getContentType().compareTo(gpsmimetype) == 0) )
+//	       if(httpConn.getContentType() != null) {
+	        if(
+	        		(httpConn.getResponseCode() == 200) 
+//	          && (httpConn.getContentType().compareTo(gpsmimetype) == 0) 
+	          )
             //&& (httpConn.getContentType().compareTo("application/octet-stream") == 0) )
 	        {
 	            System.out.println("GPS : loadAlmanach()");
 	            this.loadAlmanach(httpConn);
-	        }
-	        else {}
+//	        }
+//	        else {}
 	       }
            else {
 	        System.out.println("URL/mimetype incorrect/site hors ligne :-(");
